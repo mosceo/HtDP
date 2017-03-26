@@ -1,25 +1,9 @@
-;; The first three lines of this file were inserted by DrRacket. They record metadata
-;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname |1|) (read-case-sensitive #t) (teachpacks ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "image.rkt" "teachpack" "2htdp") (lib "universe.rkt" "teachpack" "2htdp") (lib "batch-io.rkt" "teachpack" "2htdp")) #f)))
-;==================================================================================
-; ABOUT THE PROGRAM
-;==================================================================================
-; This is a world program that shows a cat moving randomly on the screen.
-; It has a certain happiness level (you can see a gauge on the screen).
-; The cat gets tired from all the walking and its happiness decreases.
-; When it becomes less happy it slows down.
-; If you press button "up" on the keyboard, you feed the cat.
-; If you move your mouse cursor over the cat, you stroke it.
-; Feeding and stroking increases the cat's happiness level.
-
-(require math)
-
 ;==================================================================================
 ; Constants and data definitions
 ;==================================================================================
 
-(define CAT .)
-(define FOOD .)
+(define CAT #cat.png#)
+(define FOOD #food.png#)
 (define CAT-RADIUS (/ (image-width CAT) 2))
 (define WIDTH 600)
 (define HEIGHT 400)
@@ -305,15 +289,6 @@
  [on-mouse mouse]
  [on-key   key]
  [to-draw  render])
-
-
-
-
-
-
-
-
-
 
 
 
