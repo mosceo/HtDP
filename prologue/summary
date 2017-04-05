@@ -1,9 +1,6 @@
 ;========================================================================
-; Часть 1, Основные моменты (также из предисловия)
+; Preface & Prologue. Main points.
 ;========================================================================
-
-;=====================
-; Из предисловия
 
 -) систематическое проектирование программ
 
@@ -30,14 +27,5 @@
 F) Do you see repeated expressions in the code? Do you see similar blocks of logic? Eliminate them all by creating new fnctions and constant definitions.
 
 F) Do you see a number in an expression? After some time you may have no idea what it stands for. These numbers are called magic numbers. Get rid of them by creating constant definitions. (* 20 t) becomes (* SPEED t).
-
-
-
-
-
-
-
-
-
 
 
