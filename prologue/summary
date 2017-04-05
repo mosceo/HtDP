@@ -8,13 +8,13 @@
 
 *) This book deals with just two recipes for complete programs: one for programs with GUI and one for batch programs. In contrast, design recipes for functions come in a wide variety of flavors (depends on the data consumed by the function).
 
--) Getting everything right at once is nearly impossible. Instead, computer scientists borrow iterative refinement from the physical sciences to tackle this design problem. In essence, iterative refinement recommends stripping away all inessential details at first and finding a solution for the remaining core problem. A refinement step adds in one of these omitted details and re-solves the expanded problem, using the existing solution as much as possible.
+*) Getting everything right at once is nearly impossible. Instead, computer scientists apply iterative refinement. In essence, iterative refinement recommends stripping away all inessential details at first and finding a solution for the remaining core problem. A refinement step adds in one of these omitted details and re-solves the expanded problem, using the existing solution as much as possible.
 
--) Программирование это не знание языка. Быть хорошим программистов это как быть хорошим эссеистом. Знание языка не достаточно.
+*) It is not enough to know a programming language to be a good programmer. There is something more fundamental. If you know how to program well in one language, you will program well in any other language.
 
--) Принципы правильного дизайна приложимы к любому языку. И не только к программированию, но и к другим вмдам деятельности.
+*) Being a good programmer is like being a good essay writer. Knowing English alone does not make you a good essay writer. You have to know English to write essays, but there is something else.
 
--) MVC
+*) Good design principles can be applied in any programming language. We can apply them in other professions, not only in computer science.
 
 -) top-down planning phase followed by a bottom-up construction phase
 
