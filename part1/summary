@@ -110,6 +110,9 @@
 
 *) One thing to keep in mind is that data definitions may refer to other data definitions.  If a function deals with nested structures, develop one function per level of nesting. 
 
+-) одна точка вхождения в программу (несколько определений констант, которые определяют всё)
+(должно быть в первой части)
+
 *) Приводите примеры для определений данных, так же как вы приводите примеры для функций.
 
 *) making design choices. Проектирую определения данных мы делаем выбор. Выбор может быть плохой, программа будет длиннее и сложнее. Как делать правильный выбор? Это приходит с практикой.
