@@ -16,14 +16,15 @@
 
 *) Good design principles can be applied in any programming language. We can apply them in other professions, not only in computer science.
 
--) top-down planning phase followed by a bottom-up construction phase
+*) The book suggests top-down planning phase followed by a bottom-up construction phase.
 
--) In the ideal program, a small request, such as changing the sizes of the canvas, should require an equally small change.
+*) In the ideal program, a small request, such as changing the sizes of the canvas, should require an equally small change.
 
--) In modern parlance, you have just experienced your first program refactoring. Every time you re-organize your program to prepare yourself for likely future change requests, you refactor your program.
+*) Every time you re-organize your program to prepare yourself for likely future change requests, you refactor your program.
 
 *) Do you see repeated expressions in the code? Do you see similar blocks of logic? Eliminate them all by creating new fnctions and constant definitions.
 
-*) Do you see a number in an expression? After some time you may have no idea what it stands for. These numbers are called magic numbers. Get rid of them by creating constant definitions. (* 20 t) becomes (* SPEED t).
+*) Do you see a number in an expression? After some time you may have no idea what it stands for. These numbers are called magic numbers. Get rid of them by creating constant definitions. `(* 20 t)` becomes `(* SPEED t)`.
 
+*) In Star Wars master Yoda says a very deep thing: "you must unlearn what you have learned". When we were learning programming, we were concentrating on the mechanics of the language and picked up some bad practices. And now we have to "unlearn" them to learn good program design. You see, a way from bad programmer to good programmer can be longer than from no programmer to good programmer. Because we have to unlearn all of this.
 
