@@ -1,0 +1,128 @@
+*) In general, when a problem refers to distinct tasks of computation, a program should consist of one function per task and a main function that puts it all together. We formulate this idea as a simple slogan: Define one function per task.
+
+*) For every constant mentioned in a problem statement, introduce one constant definition.
+
+*) a batch program consumes all of its inputs at once and computes its result. (also reads input from files and writes to files) an interactive program consumes some of its inputs, computes, produces some output, consumes more input, and so on.
+
+*) A good program comes with a short write-up that explains what it does, what inputs it expects, and what it produces. Ideally, it also comes with some assurance that it actually works.
+
+*) garage programming
+
+*) Programs work with informtion. For a program to process information, it must turn it into some form of data in the programming language; then it processes the data; and once it is finished, it turns the resulting data into information again.
+
+*) Мы должны решить как представлять информацию в виде данных. Мы пишем data definition в виде комментариев. Они описывают класс данных, а также дают примеры как создавать элементы этого класс.
+
+Примеры:
+
+; A PositiveNumber is a Number greater or equal to 0. 
+
+; A Temperature is a Number. 
+; interpretation represents Celsius degrees
+
+; An AnimationState is a Number.
+; interpretation the number of clock ticks 
+; since the animation started
+
+*) Рецепт проектирования функции состоит из шести шагов. Вот пример завершённой функции:
+; Number -> Number                                < signature
+; computes the area of a square with side len     < purpose statement
+; given: 2, expect: 4                             < examples
+; given: 7, expect: 49
+(define (area-of-square len)                      < function definition (body)
+  (sqr len))
+
+*) domain knowledge
+
+*) top-down design, wish-list
+
+*) Designing World Programs.
+1. For all those properties of the world that remain the same over time and are needed to render it as an Image, introduce constants. 
+2. Those properties that change over time—in reaction to clock ticks, key strokes, or mouse actions—give rise to the current state of the world. Your task is to develop a data representation for all possible states of the world.
+3. Once you have a data representation for the state of the world, you need to design a number of functions so that you can form a valid big-bang expression.
+4.
+
+*) You may wonder why this program modification is so straightforward. There are really two reasons. First, this book and its software strictly separate the data that a program tracks—the model—and the image that it shows—the view. In particular, functions that deal with events have nothing to do with how the state is rendered.
+
+*) Enumerations
+
+; A TrafficLight is one of the following Strings:
+; – "red"
+; – "green"
+; – "yellow"
+; interpretation the three strings represent the three 
+; possible states that a traffic light may assume 
+
+; WorldState KeyEvent -> ...
+(define (handle-key-events w ke)
+  (cond
+    [(= (string-length ke) 1) ...]
+    [(string=? "left" ke) ...]
+    [(string=? "right" ke) ...]
+    [(string=? "up" ke) ...]
+    [(string=? "down" ke) ...]
+    ...))
+
+*) An interval is a description of a class of numbers via boundaries.
+
+; A Price falls into one of three intervals: 
+; — 0 through 1000
+; — 1000 through 10000
+; — 10000 and above.
+; interpretation the price of an item  
+
+; Price -> Number
+; compute sales tax
+(define (sales-tax p)
+  (cond
+    [(and (<= 0 p) (< p 1000)) ...]
+    [(and (<= 1000 p) (< p 10000)) ...]
+    [(>= p 10000) ...]))
+
+*) itemizations, which generalize intervals and enumerations. They allow the combination of any already-defined data classes with each other and with individual pieces of data.
+
+; A LRCD (for launching rocket count down) is one of:
+; – "resting"
+; – a Number between -3 and -1
+; – a NonnegativeNumber 
+; interpretation a grounded rocket, in count-down mode,
+; a number denotes the number of pixels between the
+; top of the canvas and the rocket (its height)
+
+*) Проектирование функции зависит от типа данных. For functional examples, however, it is imperative that you pick at least one example from each sub-class in the data definition. 
+
+*) Структура собирает несколько эементов в единое целое. Создаются так (define-struct posn [x y]). Создаётся ряд функция: конструктор, селекторы, предикат.
+
+(define-struct person [name hair eyes phone])
+(define-struct CD [artist title price])
+
+*) Определение стуктурных типов данных
+
+(define-struct vel [deltax deltay])
+; A Vel is a structure: 
+;   (make-vel Number Number)
+; interpretation (make-vel dx dy) means a velocity of 
+; dx pixels [per tick] along the horizontal and
+; dy pixels [per tick] along the vertical direction
+
+(define (ufo-move-1 u)
+  (... (ufo-loc u) ... (ufo-vel u) ...))
+
+
+*) One thing to keep in mind is that data definitions may refer to other data definitions.  If a function deals with nested structures, develop one function per level of nesting. 
+
+*) Приводите примеры для определений данных, так же как вы приводите примеры для функций.
+
+*) making design choices. Проектирую определения данных мы делаем выбор. Выбор может быть плохой, программа будет длиннее и сложнее. Как делать правильный выбор? Это приходит с практикой.
+
+*) Programming languages, including BSL, come with a rich set of libraries so that programmers don’t have to re-invent the wheel all the time.
+
+
+
+
+
+
+
+
+
+
+
