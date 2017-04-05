@@ -1,14 +1,12 @@
-;========================================================================
+;==============================================================================
 ; Preface & Prologue. Main points.
-;========================================================================
+;==============================================================================
 
--) систематическое проектирование программ
+*) A good programmer designs programs. A bad programmer tinkers until the program seems to work. Coding is just a part of programming. Before we even begin writing code we should do a lot of work to design the application. We should develop programs in a *systematic* manner. Which means we have a strict plan what to do and design comes before coding.
 
--) The key is to discover which functions are needed, how to connect them, and how to build them from basic ingredients.
+*) Functions are the basic building blocks. The key is to discover which functions are needed, how to connect them, and how to build them from basic ingredients.
 
--) в предисловии есть 6 этапов рецепта проектирования функции
-
--) This book deals with just two recipes for complete programs: one for programs with graphical user interface (GUI) and one for batch programs. In contrast, design recipes for functions come in a wide variety of flavors: for atomic forms of data such as numbers; for enumerations of different kinds of data; for data that compounds other data in a fixed manner; for finite but arbitrarily large data; and so on.
+*) This book deals with just two recipes for complete programs: one for programs with GUI and one for batch programs. In contrast, design recipes for functions come in a wide variety of flavors (depends on the data consumed by the function).
 
 -) Getting everything right at once is nearly impossible. Instead, computer scientists borrow iterative refinement from the physical sciences to tackle this design problem. In essence, iterative refinement recommends stripping away all inessential details at first and finding a solution for the remaining core problem. A refinement step adds in one of these omitted details and re-solves the expanded problem, using the existing solution as much as possible.
 
