@@ -12,104 +12,127 @@
 
 *) Sometimes to write a program you might need some knowledge from other fields (e.g., physics or biology). It is called domain knowledge.
 
--) Programs work with informtion. For a program to process information, it must turn it into some form of data in the programming language; then it processes the data; and once it is finished, it turns the resulting data into information again.
+*) A program consumes information and turns it into some form of data. Then it processes the data. When it is finished, it turns the resulting data into information again.
 
--) Мы должны решить как представлять информацию в виде данных. Мы пишем data definition в виде комментариев. Они описывают класс данных, а также дают примеры как создавать элементы этого класс.
+*) The first question we have to answer is how to represent information as data in our program. We write data definitions that describe classes of data.
 
-Примеры:
+    Examples:
 
-; A PositiveNumber is a Number greater or equal to 0. 
+    ; A PositiveNumber is a Number greater or equal to 0. 
 
-; A Temperature is a Number. 
-; interpretation represents Celsius degrees
+    ; A TrafficLight is one of the following Strings:
+    ; – "red"
+    ; – "green"
+    ; – "yellow"
+    ; interpretation the three strings represent the three 
+    ; possible states that a traffic light may assume
 
-; An AnimationState is a Number.
-; interpretation the number of clock ticks 
-; since the animation started
+*) There are six steps in the design recipe for functions:
+   1. From Problem Analysis to Data Definitions
+      Identify the information that must be represented and how it is represented
+      in the chosen programming language.
+      Formulate data definitions and illustrate them with examples.
+   2. Signature, Purpose Statement, Header
+      State which data the desired function consumes and produces.
+      Articulate what the function computes as a concise one-line statement.
+      Define a stub that lives up to the signature.
+   3. Functional Examples
+      Work through examples that illustrate the function’s purpose.
+   4. Function Template
+      Translate the data definitions into an outline of the function.
+   5. Function Definition
+      Fill in the gaps in the function template. Exploit the purpose statement and the examples.
+   6. Testing
+      Articulate the examples as tests and ensure that the function passes all.
+      Doing so discovers mistakes and also helps others read and understand the definition
+      when the need arises—and it will arise for any serious program.
 
--) Рецепт проектирования функции состоит из шести шагов. Вот пример завершённой функции:
-; Number -> Number                                < signature
-; computes the area of a square with side len     < purpose statement
-; given: 2, expect: 4                             < examples
-; given: 7, expect: 49
-(define (area-of-square len)                      < function definition (body)
-  (sqr len))
+*) Here are the components that a fuction consists of.
+   ; Number -> Number                                < signature
+   ; computes the area of a square with side len     < purpose statement
+   ; given: 2, expect: 4                             < examples
+   ; given: 7, expect: 49
+   (define (area-of-square len)                      < function definition (body)
+     (sqr len))
 
 *) Top-down approach to design says that we first design top-level functions, than lower-level functions, than more-lower-level primitives and so on. We can implement a top-level function in terms of lower-level functions that don't yet exist. We pretend that they exist and put them on our *wish-list* to implement them later.
 
 *) MVC makes it easier to develop the application. We can separete working on data (model) from working on its representation (view). When we decide how data changes, we don't have to think how its rendering on the screen changes.
 
 
--) Designing World Programs.
-1. For all those properties of the world that remain the same over time and are needed to render it as an Image, introduce constants. 
-2. Those properties that change over time—in reaction to clock ticks, key strokes, or mouse actions—give rise to the current state of the world. Your task is to develop a data representation for all possible states of the world.
-3. Once you have a data representation for the state of the world, you need to design a number of functions so that you can form a valid big-bang expression.
-4.
+*) Designing World Programs.
+   1. Introduce constants for those properties of the world that remain the same.
+   2. Develop a data representation for all possible states of the world.
+   3. Design a number of functions so that you can form a valid big-bang expression.
+   4. You need a main function.
 
--) Enumerations
+*) Imagine you have a finite collection of elements of the same type. If you can assign only these elements to your data type, this data type is an enumeration. Here is an example:
 
-; A TrafficLight is one of the following Strings:
-; – "red"
-; – "green"
-; – "yellow"
-; interpretation the three strings represent the three 
-; possible states that a traffic light may assume 
+   ; A TrafficLight is one of the following Strings:
+   ; – "red"
+   ; – "green"
+   ; – "yellow"
+   ; interpretation the three strings represent the three 
+   ; possible states that a traffic light may assume 
 
-; WorldState KeyEvent -> ...
-(define (handle-key-events w ke)
-  (cond
-    [(= (string-length ke) 1) ...]
-    [(string=? "left" ke) ...]
-    [(string=? "right" ke) ...]
-    [(string=? "up" ke) ...]
-    [(string=? "down" ke) ...]
-    ...))
+   In a function template you create as many cond clauses as there are elements in the enumeration.
+   
+   ; WorldState KeyEvent -> ...
+   (define (next-light tl)
+     (cond
+       [(string=? "red" tl) ...]
+       [(string=? "green" tl) ...]
+       [(string=? "blue" tl) ...]
+       [else ...]))
 
--) An interval is a description of a class of numbers via boundaries.
+*) An interval is a description of a class of numbers via boundaries.
 
-; A Price falls into one of three intervals: 
-; — 0 through 1000
-; — 1000 through 10000
-; — 10000 and above.
-; interpretation the price of an item  
+   ; A WorldState falls into one of three intervals: 
+   ; – between 0 and CLOSE
+   ; – between CLOSE and HEIGHT
+   ; – below HEIGHT
+   
+   In a function template the number of cond clauses is equal to the number of intervals.
 
-; Price -> Number
-; compute sales tax
-(define (sales-tax p)
-  (cond
-    [(and (<= 0 p) (< p 1000)) ...]
-    [(and (<= 1000 p) (< p 10000)) ...]
-    [(>= p 10000) ...]))
+   ; WorldState -> WorldState
+   (define (f y)
+     (cond
+       [(<= 0 y CLOSE) ...]
+       [(<= CLOSE y HEIGHT) ...]
+       [(>= y HEIGHT) ...]))
 
--) itemizations, which generalize intervals and enumerations. They allow the combination of any already-defined data classes with each other and with individual pieces of data.
+*) An itemizations is a mix of all other data types.
 
-; A LRCD (for launching rocket count down) is one of:
-; – "resting"
-; – a Number between -3 and -1
-; – a NonnegativeNumber 
-; interpretation a grounded rocket, in count-down mode,
-; a number denotes the number of pixels between the
-; top of the canvas and the rocket (its height)
+   ; A LRCD (for launching rocket count down) is one of:
+   ; – "resting"
+   ; – a Number between -3 and -1
+   ; – a NonnegativeNumber 
+   ; interpretation a grounded rocket, in count-down mode,
+   ; a number denotes the number of pixels between the
+   ; top of the canvas and the rocket (its height)
 
--) Проектирование функции зависит от типа данных. For functional examples, however, it is imperative that you pick at least one example from each sub-class in the data definition. 
+*) Design of a function depends on a data type. For functional examples you should pick at least one example from each sub-class in the data definition. 
 
--) Структура собирает несколько эементов в единое целое. Создаются так (define-struct posn [x y]). Создаётся ряд функция: конструктор, селекторы, предикат.
+*) When you need to gather several related pieces of data into one entity, use a structure.
+   
+   A structure data type is defined like this:
+   (define-struct person [name email salary])
+   
+   Other functions are created automatically.
+   
+   (make-person "Dave" "dave@gmail.com" 65000)         ; constructor
+   (person-name p) (person-email p) (person-salary p)  ; selectors
+   (person? p)                                         ; predicate
 
-(define-struct person [name hair eyes phone])
-(define-struct CD [artist title price])
+*) Here is a proper structure type definition:
 
--) Определение стуктурных типов данных
+   (define-struct person [name email salary])
+   ; An Person is a structure: 
+   ;   (make-person String String Number)
+   ; interpretation a persons's name, email and salary 
 
-(define-struct vel [deltax deltay])
-; A Vel is a structure: 
-;   (make-vel Number Number)
-; interpretation (make-vel dx dy) means a velocity of 
-; dx pixels [per tick] along the horizontal and
-; dy pixels [per tick] along the vertical direction
-
-(define (ufo-move-1 u)
-  (... (ufo-loc u) ... (ufo-vel u) ...))
-
+   (define (process-person p)
+     (... (person-name p) ... (person-email p) ... (person-salary p) ...))
 
 *) One thing to keep in mind is that data definitions may refer to other data definitions.  If a function deals with nested structures, develop one function per level of nesting. 
 
@@ -118,8 +141,6 @@
 *) Make examples for data definitions like you do for functions. Examples help to understand.
 
 *) When we design an application, we make design choices. In future they may turn out to be bad design choices. We might realize that If we had chosen other data structures the program would be simpler. We can't learn how to make good choices, it only comes with practice.
-
-making design choices. Проектирую определения данных мы делаем выбор. Выбор может быть плохой, программа будет длиннее и сложнее. Как делать правильный выбор? Это приходит с практикой.
 
 *) Don't reinvent the wheel. Your language probably comes with a rich library and you have to know it well. Functions from the library are well-written and well-tested.
 
