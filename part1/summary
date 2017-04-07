@@ -113,16 +113,16 @@
 
 *) Design of a function depends on a data type. For functional examples you should pick at least one example from each sub-class in the data definition. 
 
-*) When you need to gather several related pieces of data into one entity, use a structure.
+*) When you need to combine several related pieces of data into one entity, use a structure.
    
    A structure data type is defined like this:
-   (define-struct person [name email salary])
+   (define-struct person [name email age])
    
    Other functions are created automatically.
    
-   (make-person "Dave" "dave@gmail.com" 65000)         ; constructor
-   (person-name p) (person-email p) (person-salary p)  ; selectors
-   (person? p)                                         ; predicate
+   (make-person "Dave" "dave@gmail.com" 32)          ; constructor
+   (person-name p) (person-email p) (person-age p)   ; selectors
+   (person? p)                                       ; predicate
 
 *) Here is a proper structure type definition:
 
