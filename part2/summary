@@ -1,0 +1,6 @@
+*) purpose of a template is to express the data definition as a function layout
+   перенести определение данных в шаблон (набросок) функции
+   
+*) (find combinator) arrange the examples from the third step in a table. Place the given input in the first column and the desired output in the last column. In the intermediate columns enter the values of the selector expressions and the natural recursion(s). Add examples until you see a pattern emerge that suggests a combinator.
+
+*)

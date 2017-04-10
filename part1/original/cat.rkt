@@ -219,12 +219,6 @@
 -1 4 1 #"\0"
 0 71 1 #"\0"
 1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 0 100 0 0 0 0 -1
--1 2 1 #"\0"
-0 71 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
--1 -1 2 1 #"\0"
-0 71 1 #"\0"
-1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 1.0 1.0 1.0 0 100 0 0 0 0 -1
 -1 0 1 #"\0"
 0 75 10 #"Monospace\0"
 0.0 11 90 -1 90 -1 3 -1 0 1 0 1 0 0 0.0 0.0 0.0 0.0 0.0 0.0 0 0 0 255
@@ -240,6 +234,12 @@
 0 -1 -1 2 1 #"\0"
 0 -1 1 #"\0"
 1.0 0 -1 -1 -1 93 -1 -1 0 1 0 0 0 0 0.0 0.0 0.0 1.0 1.0 1.0 0 0 175 0 0
+0 -1 -1 2 1 #"\0"
+0 71 1 #"\0"
+1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
+-1 -1 2 1 #"\0"
+0 71 1 #"\0"
+1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0.0 0.0 0.0 1.0 1.0 1.0 0 100 0 0 0
 0 -1 -1 0 1 #"\0"
 0 -1 1 #"\0"
 0.0 11 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 1.0 1.0 1.0 1.0 1.0 1.0 0 0 0 0 0 0
@@ -276,7 +276,7 @@
 0 -1 14 1 #"\0"
 0 -1 1 #"\0"
 1.0 0 -1 -1 -1 -1 -1 -1 0 0 0 0 1 0 0.0 0.0 0.0 0.0 0.0 0.0 0 0 0 255
-255 255 -1 -1           0 2433 0 4 3 85
+255 255 -1 -1           0 2441 0 4 3 85
 (
  #";; The first three lines of this file were inserted by DrRacket. The"
  #"y record metadata"
@@ -286,17 +286,11 @@
  #";; about the language level of this file in a form that our tools ca"
  #"n easily process."
 ) 0 0 4 29 1 #"\n"
-0 0 4 3 120
+0 0 4 3 173
 (
  #"#reader(lib \"htdp-beginner-reader.ss\" \"lang\")((modname cat) (rea"
- #"d-case-sensitive #t) (teachpacks ((lib \"image.rkt\" \"teac"
-) 0 0 4 3 291
-(
- #"hpack\" \"2htdp\") (lib \"universe.rkt\" \"teachpack\" \"2htdp\") (l"
- #"ib \"batch-io.rkt\" \"teachpack\" \"2htdp\"))) (htdp-settings #(#t c"
- #"onstructor repeating-decimal #f #t none #f ((lib \"image.rkt\" \"tea"
- #"chpack\" \"2htdp\") (lib \"universe.rkt\" \"teachpack\" \"2htdp\") ("
- #"lib \"batch-io.rkt\" \"teachpack\" \"2htdp\")) #f)))"
+ #"d-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor"
+ #" repeating-decimal #f #t none #f () #f)))"
 ) 0 0 4 29 1 #"\n"
 0 0 17 3 83
 (
@@ -320,8 +314,7 @@
 0 0 17 3 1 #" "
 0 0 17 3 9 #"happiness"
 0 0 17 3 1 #" "
-0 0 17 3 5 #"level"
-0 0 17 3 34 #" (there is a gauge on the screen)."
+0 0 17 3 39 #"level (there is a gauge on the screen)."
 0 0 24 29 1 #"\n"
 0 0 17 3 70
 (
@@ -346,8 +339,7 @@
 0 0 17 3 1 #" "
 0 0 17 3 6 #"around"
 0 0 17 3 1 #" "
-0 0 17 3 3 #"the"
-0 0 17 3 9 #" cursor.)"
+0 0 17 3 12 #"the cursor.)"
 0 0 24 29 1 #"\n"
 0 0 17 3 9 #"; Feeding"
 0 0 17 3 1 #" "
@@ -357,14 +349,25 @@
 0 0 17 3 1 #" "
 0 0 17 3 9 #"increases"
 0 0 17 3 1 #" "
-0 0 17 3 3 #"the"
-0 0 17 3 23 #" cat's happiness level."
+0 0 17 3 26 #"the cat's happiness level."
 0 0 24 29 1 #"\n"
 0 0 24 29 1 #"\n"
 0 0 24 3 1 #"("
 0 0 15 3 7 #"require"
 0 0 24 3 1 #" "
 0 0 14 3 4 #"math"
+0 0 24 3 1 #")"
+0 0 24 29 1 #"\n"
+0 0 24 3 1 #"("
+0 0 15 3 7 #"require"
+0 0 24 3 1 #" "
+0 0 14 3 11 #"2htdp/image"
+0 0 24 3 1 #")"
+0 0 24 29 1 #"\n"
+0 0 24 3 1 #"("
+0 0 15 3 7 #"require"
+0 0 24 3 1 #" "
+0 0 14 3 14 #"2htdp/universe"
 0 0 24 3 1 #")"
 0 0 24 29 1 #"\n"
 0 0 24 29 1 #"\n"
