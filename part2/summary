@@ -3,4 +3,6 @@
    
 *) (find combinator) arrange the examples from the third step in a table. Place the given input in the first column and the desired output in the last column. In the intermediate columns enter the values of the selector expressions and the natural recursion(s). Add examples until you see a pattern emerge that suggests a combinator.
 
-*)
+*) we suggest to create and to refer to a separate function template whenever you are developing a template for a data definition that refers to other data definitions
+
+*) iterative refinement is a crucial design principle. Often it is impossible to design an application without it.
