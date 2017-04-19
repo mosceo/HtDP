@@ -17,10 +17,10 @@
 ;==================================================================================
 
 ; the board size in number of cells
-(define CW 40)
-(define CH 40)
+(define CW 20)
+(define CH 20)
 ; size of one cell in pixels
-(define W 10)
+(define W 20)
 
 (define WORM-PIECE (square W "solid" "blue"))
 (define FRUIT (square W "solid" "green"))
@@ -222,8 +222,10 @@
 ; List-of-Posns Posn -> Posn
 ; return the given position if it doesn't interfere with the worm,
 ; otherwise call itself recursively with a new random position
+(check-satisfied (new-fruit-random (list (make-posn 1 1) (make-posn 2 1))
+                                   (make-posn 1 1)) posn?)
 (define (new-fruit-random worm pos)
-  (cond [(member pos worm) (new-fruit-random worm pos)]
+  (cond [(member pos worm) (new-fruit-random worm (random-pos 1))]
         [else pos]))
 
 
