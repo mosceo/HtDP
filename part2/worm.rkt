@@ -49,8 +49,12 @@
 ;
 ; example: (make-game "left" (list (make-posn 2 2) (make-posn 3 2)) (make-posn 5 5))
 ; interpretation: the worm's body takes up two cells: (2, 2) and (3, 2),
-;    it is headed left, the fruit is located at (10, 20)
+;  it is headed left, the fruit is located at (10, 20)
 
+; Notice: we represent a worm as a List-of-Posns, where each posn contains
+;  the board coordinates of one piece of the worm.
+;  The first posn is the worm's head, the second posn is its neck and so on.
+;  The worm always consists of at least one piece, so the list is never empty.
 
 ; initial game: the worm is in the center and headed left
 (define DEFAULT-GAME
