@@ -4,10 +4,9 @@
 ;==================================================================================
 ; FEEDING WORM
 ;==================================================================================
-; You direct the worm who eats fruit and grows.
-; ...
-; ...
-; ...
+; You direct the worm who eats fruit and grows. One fruit - one piece to the body.
+; If you hit the wall or your own body, you lose.
+
 
 (require 2htdp/image)
 (require 2htdp/universe)
@@ -17,18 +16,18 @@
 ; World constants
 ;==================================================================================
 
-; number of cells
+; the board size in number of cells
 (define CW 40)
 (define CH 40)
-; size of one cell
+; size of one cell in pixels
 (define W 10)
-; one part of a worm's body
+
 (define WORM-PIECE (square W "solid" "blue"))
 (define FRUIT (square W "solid" "green"))
 
-
 (define BACKGROUND (empty-scene (* CW W) (* CW W)))
-(define GAME-OVER-TEXT "Press space to start a new game")
+(define GAME-OVER-IMAGE (text "Press 'space' to start a new game" 18 "black"))
+
 
 ;==================================================================================
 ; Data definitions
@@ -39,20 +38,21 @@
 ; - "right"
 ; - "up"
 ; - "down"
-; it is the direction in which the worm moves
+; the direction in which the worm moves
+
 
 (define-struct game [dir worm fruit]) 
 ; A Game is a structure:
-;   (make-game Direction List-of-posns Posn Number Boolean)
+;   (make-game Direction List-of-Posns Posn)
 ; represents a state of the game where a worm is a list of posns,
 ; that contain the coordinates of his body
 ;
-; example: (make-game "left" (list (make-posn 2 2) (make-posn 3 2)) (make-posn 10 20))
-; interpretation: the worm has a body that takes up two cells, it is headed left,
-;                 the fruit is located at (10, 20)
+; example: (make-game "left" (list (make-posn 2 2) (make-posn 3 2)) (make-posn 5 5))
+; interpretation: the worm's body takes up two cells: (2, 2) and (3, 2),
+;    it is headed left, the fruit is located at (10, 20)
 
 
-; initial game
+; initial game: the worm is in the center and headed left
 (define DEFAULT-GAME
   (make-game "left" (list (make-posn (/ CW 2) (/ CH 2))) (make-posn 5 5)))
 
@@ -60,12 +60,13 @@
 (define GAME1 (make-game "left" (list (make-posn 1 1)) (make-posn 5 5)))
 (define GAME2 (make-game "left" (list (make-posn 1 1) (make-posn 2 1)) (make-posn 5 5)))
 
+
 ;==================================================================================
 ; Draw
 ;==================================================================================
 
 ; Game -> Image
-; render a given game
+; produce an image for a given game state
 (define (drawh g)
   (draw-game-over
    g (draw-fruit
@@ -78,32 +79,41 @@
   (cond [(game-over? g) (overlay GAME-OVER-IMAGE im)]
         [else im]))
 
+
 ; Game Image -> Image
+; draw the fruit
 (define (draw-fruit g im)
   (place-image FRUIT (x (game-fruit g)) (y (game-fruit g)) im))
 
-; List-of-Posns Image -> Image
+
+; Game Image -> Image
+; draw the worm
 (define (draw-worm g im)
   (draw-worm-pieces (game-worm g) im))
 
+
 ; List-of-Posns Image -> Image
+; draw the pieces of a worm's body
 (define (draw-worm-pieces worm im)
   (cond [(empty? worm) im]
         [else (draw-worm-piece (first worm)
                                (draw-worm-pieces (rest worm) im))]))
 
+
 ; Posn Image -> Image
-; draws a worm piece at a given position on the grid
+; draw a worm piece at a given position on the grid
 (define (draw-worm-piece p im)
   (place-image WORM-PIECE (x p) (y p) im))
 
+
 ; Posn -> Number
-; compute the canvas x-coordinate from grid-coordinates
+; compute canvas x-coordinate from board-coordinates
 (define (x p)
   (+ (* W (posn-x p)) (/ W 2)))
 
+
 ; Posn -> Number
-; compute the canvas y-coordinate from grid-coordinates
+; compute the canvas y-coordinate from board-coordinates
 (define (y p)
   (+ (* W (posn-y p)) (/ W 2)))
 
@@ -120,7 +130,7 @@
 
 
 ; Game -> Game
-; move the worm
+; move the worm, possibly eat fruit and grow
 (define (move g)
   (cond [(fruit-ahead? g) (extend-new-fruit g)]
         [else (extend-cut g)]))
@@ -133,7 +143,7 @@
 
 
 ; Game -> Game
-; extend the worm, cut its tail
+; extend the worm and cut its tail
 (define (extend-cut g)
   (make-game (game-dir g)
              (remove-last (cons (ahead g) (game-worm g)))
@@ -142,6 +152,10 @@
 
 ; List -> List
 ; remove the last element in a list
+(check-expect (remove-last (list 1)) '())
+(check-expect (remove-last (list 1 2)) (list 1))
+(check-expect (remove-last (list 1 2 3)) (list 1 2))
+
 (define (remove-last lst)
   (cond [(empty? (rest lst)) '()]
         [else (cons (first lst) (remove-last (rest lst)))]))
@@ -149,7 +163,7 @@
 
 ; Game -> Game
 ; extend the worm without cutting its tail,
-; change fruit's position
+; change the fruit's position
 (define (extend-new-fruit g)
   (make-game (game-dir g)
              (cons (ahead g) (game-worm g))
@@ -157,17 +171,17 @@
 
 
 ; Game -> Posn
-; compute coordinates of the cell where the worm is headed
+; compute the cell's coordinates where the worm is headed
 (define (ahead g)
   (pos-next (head g) (game-dir g)))
 
 
 ; Posn Direction -> Posn
-; compute the position next the given at a given direction
-(check-expect (pos-next (make-posn 10 10) "left") (make-posn 9 10))
+; compute the position next to the given position at a given direction
+(check-expect (pos-next (make-posn 10 10) "left")  (make-posn 9 10))
 (check-expect (pos-next (make-posn 10 10) "right") (make-posn 11 10))
-(check-expect (pos-next (make-posn 10 10) "up") (make-posn 10 9))
-(check-expect (pos-next (make-posn 10 10) "down") (make-posn 10 11))
+(check-expect (pos-next (make-posn 10 10) "up")    (make-posn 10 9))
+(check-expect (pos-next (make-posn 10 10) "down")  (make-posn 10 11))
 
 (define (pos-next pos dir)
   (cond [(string=? dir "left")
@@ -192,15 +206,15 @@
   (second (game-worm g)))
 
 
-; Game -> List-of-Posn
-; get the worm's tail (its body except the head)
+; Game -> List-of-Posns
+; get the worm's tail (all its body except the head)
 (define (tail g)
   (rest (game-worm g)))
 
 
-; List-of_Posns -> Posn
+; List-of-Posns -> Posn
 ; compute the position for new fruit
-; (it can't be places where the worm is)
+; (it can't be placed on the worm)
 (define (new-fruit worm)
   (new-fruit-random worm (random-pos 1)))
 
@@ -214,13 +228,13 @@
 
 
 ; Any -> Posn
-; produce random position for the grid
+; produce random position for the board
 (define (random-pos dummy)
   (make-posn (random CW) (random CH)))
 
 
 ; Game -> Boolean
-; check if the next position of the worm's head is outside the grid
+; check if the worm went outside the board or hit himself
 (define (game-over? g)
   (or (outside? (head g))
       (member (head g) (tail g))))
@@ -248,7 +262,8 @@
 
 
 ; Game Direction -> Game
-; set new direction for the worm, if it's a legal direction
+; set new direction for the worm
+; (in case of illegal direction, don't change the game)
 (define (set-direction g dir)
   (cond [(legal-direction? g dir)
          (make-game dir (game-worm g) (game-fruit g))]
@@ -256,7 +271,7 @@
 
 
 ; Game Direction -> Boolean
-; check if new direction doesn't direct the head to its neck
+; check if a given direction doesn't direct the head to its neck
 (check-expect (legal-direction? GAME1 "right") #true)
 (check-expect (legal-direction? GAME2 "right") #false)
 (check-expect (legal-direction? GAME2 "down")  #true)
@@ -285,4 +300,3 @@
  [on-tick  tickh 0.10]
  [on-key keyh]
  [to-draw  drawh])
-
