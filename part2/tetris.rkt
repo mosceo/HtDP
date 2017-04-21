@@ -16,8 +16,8 @@
 ;===============================================================================
 
 ; size of the board in number of blocks
-(define BW 15)
-(define BH 25)
+(define BW 12)
+(define BH 20)
 ; size of one block in pixels
 (define W 18)
 
@@ -33,7 +33,9 @@
 ; Data definitions
 ;===============================================================================
 
-;;;; Block
+;--------
+; Block ;
+;--------
 
 ; A Block is a Posn
 ; a block on the board with certain board coordinates
@@ -44,7 +46,9 @@
   (make-posn x y))
 
 
-;;;; Piece
+;--------
+; Piece ;
+;--------
 
 (define-struct piece [size blocks])
 ; A Piece is a structure:
@@ -53,7 +57,9 @@
 ; in a square of a specified size
 
 
-;;; GamePiece
+;------------
+; GamePiece ;
+;------------
 
 (define-struct gamepiece [pos piece])
 ; A GamePiece is a structure:
@@ -79,7 +85,9 @@
 ; at row 0, two blocks at row 1 and three blocks at row 2
 
 
-;;;; Game
+;-------
+; Game ;
+;-------
 
 (define-struct game [board gamepiece over?]) 
 ; A Game is a structure:
@@ -542,8 +550,7 @@
 ; Game KeyEvent -> Game
 ; handle key events
 (define (keyh g event)
-  (cond ;[(and (game-over? g) (key=? event " ")) DEFAULT-GAME]
-        [(game-over? g) g]
+  (cond [(game-over? g) g]
         [(key=? event "left") (left-event g)]
         [(key=? event "right") (right-event g)]
         [(key=? event "down") (down-event g)]
@@ -611,7 +618,7 @@
 (define (transform90 size bl)
   (b (- size (posn-y bl) 1)
      (posn-x bl)))
-  
+
 
 ;===============================================================================
 ; Launch the world
