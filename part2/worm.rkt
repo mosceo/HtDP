@@ -25,7 +25,7 @@
 (define WORM-PIECE (square W "solid" "blue"))
 (define FRUIT (square W "solid" "green"))
 
-(define BACKGROUND (empty-scene (* CW W) (* HW W)))
+(define BACKGROUND (empty-scene (* CW W) (* CH W)))
 (define GAME-OVER-IMAGE (text "Press 'space' to start a new game" 18 "black"))
 
 

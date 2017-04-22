@@ -19,7 +19,7 @@
 (define BW 12)
 (define BH 20)
 ; size of one block in pixels
-(define W 18)
+(define W 23)
 
 (define BLOCK (overlay (square (- W 1) "solid" "blue")
                        (square W "solid" "white")))
