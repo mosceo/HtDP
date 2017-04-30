@@ -1,26 +1,35 @@
-*) purpose of a template is to express the data definition as a function layout
-   перенести определение данных в шаблон (набросок) функции
-   
-*) (find combinator) arrange the examples from the third step in a table. Place the given input in the first column and the desired output in the last column. In the intermediate columns enter the values of the selector expressions and the natural recursion(s). Add examples until you see a pattern emerge that suggests a combinator.
+*) The most interesting programs deal with data of arbitrary size. Often we can't predict the size of data. If the size of data is known, use structs, otherwise use lists.
 
-*) we suggest to create and to refer to a separate function template whenever you are developing a template for a data definition that refers to other data definitions
+*) Two ways to create a list: (cons 1 (cons 2 (cons 3 '()))) or (list 1 2 3). There are predicates cons? and list?.
 
-*) iterative refinement is a crucial design principle. Often it is impossible to design an application without it.
+*) The usual template for a function consuming lists:
 
-*) the usual list template:
+   (define (func l)
+     (cond
+       [(empty? l) ...]
+       [else (... (first l) ...
+              ... (func (rest l)) ...)]))
 
- (define (rev l)
-  (cond
-    [(empty? l) ...]
-    [else (... (first l) ...
-           ... (rev (rest l)) ...)]))
+*) Sometimes you traverse a list and call an auxiliary function on each element. Othertimes you traverse a list and combine the elements into something else.
 
-*) How to Design Programs explains that programs are collections of definitions: structure type definitions, data definitions, constant definitions, and function definitions. And don’t forget tests. Design one function per task. Formulate auxiliary function definitions for every dependency between quantities in the problem. 
+*) Create and refer to a separate function template whenever you are developing a template for a data definition that refers to other data definitions.
+
+*) Self-references call for recursive functions. Cross-references call for auxiliary functions.
 
 *) Design one template per data definition. Formulate auxiliary function definitions when one data definition points to a second data definition.
 
-*) Sometimes you should solve a more general problem. You may need to design a more general function and define the main function as a specific use of the general function. This suggestion sounds counter-intuitive but it is called for in a remarkably large number of cases.
+*) Design one template per data definition. Formulate auxiliary function definitions when one data definition points to a second data definition.
 
-*) The key insight for you is, however, that just because a function has to deal with more inputs than another function does not mean that the former is more complex than the latter; generalizations often simplify function definitions.
+*) Sometimes it is easier to solve a general problem than a narrow one. In this case you should solve the general problem and define the main function as a specific use of the general function.
 
-*) 
+*) The key insight is that just because a function has to deal with more inputs than another function does not mean that the former is more complex. Generalizations often simplify function definitions.
+
+*) Complex problems are solved by decomposition-composition. You decompose a complex problem into separate problems. You need two pieces: functions that solve the separate problems and data definitions that compose these separate solutions into a single one.
+
+*) Programs are collections of definitions: structure type definitions, data definitions, constant definitions, and function definitions. And don’t forget tests.
+
+*) Design one function per task. Formulate auxiliary function definitions for every dependency between quantities in the problem.
+
+*) Be pragmatic! Don't write a function if you already have one. All programming languages provide many built-in operations and many library functions. Explore them first.
+
+*) Iterative refinement is a crucial design principle. Sometimes it is impossible to design an application without it.
