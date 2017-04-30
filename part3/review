@@ -1,0 +1,22 @@
+*) Good programmers try to eliminate similarities as much as the programming language allows. Programmers write down their first drafts of programs, spot similarities (and other problems), and get rid of them.
+
+- avoid similarities; you must abstract over similar pieces of code and this chapter teaches you how to abstract.
+
+- functional abstraction
+
+*) a template for a parametric data definitions
+
+; A [List-of ITEM] is one of: 
+; – '() 
+; – (cons ITEM [List-of ITEM])
+
+example:
+
+; A [Maybe X] is one of: 
+; – #false 
+; – X
+
+
+*) Functions are values: arguments, results, items in lists.
+
+
