@@ -2,9 +2,13 @@
 
 - avoid similarities; you must abstract over similar pieces of code and this chapter teaches you how to abstract.
 
-- functional abstraction
 
-*) a template for a parametric data definitions
+
+-) tell about functional abstraction
+
+-) tell about data abstraction
+
+a template for a parametric data definitions
 
 ; A [List-of ITEM] is one of: 
 ; – '() 
@@ -16,7 +20,31 @@ example:
 ; – #false 
 ; – X
 
-
 *) Functions are values: arguments, results, items in lists.
 
+*) To abstract means to turn something concrete into a parameter.
 
+-) ~Write here a shorter version of the receipe to create abstract functions.
+
+*) A signature describes a class of functions. For example, the signature [Number -> Boolean] describes a class of all functions that consume a Number and return a Boolean.
+
+-) Signatures also can be abstracted. Here is a signature with parameters:
+   ; [X Y] [List-of X] -> [List-of Y]
+
+-)
+; [List-of Number] [Number -> Number] -> [List-of Number]
+; [List-of String] [String -> String] -> [List-of String]
+; abstracting
+; [X] [List-of X] [X -> X] -> [List-of X]
+; instantiate for some data type IR
+; [List-of IR] [IR -> IR] -> [List-of IR]
+
+*) The elimination of similarities in favor of abstractions has many advantages. But, the single most important advantage is the creation of single points of control for some common functionality. Putting the definition for some functionality in one place makes it easy to maintain a program. When you discover a mistake, you have to go to just one place to fix it.
+
+*) A guideline: "Form an abstraction instead of copying and modifying any code."
+
+*) The chosen programming language affects a programmer’s ability to express solutions, and a future reader’s ability to recognize the design insight of the original creator.
+
+*) To find a matching abstraction means to pick an abstraction whose purpose is more general than the one for the function to be designed.
+
+*) Inspect the code of your project for places where it can benefit from existing abstraction. Once you have simplified the code with the use of existing abstractions look for opportunities to create abstractions.
