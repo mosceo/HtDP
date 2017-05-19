@@ -1,50 +1,109 @@
 *) Good programmers try to eliminate similarities as much as the programming language allows. Programmers write down their first drafts of programs, spot similarities (and other problems), and get rid of them.
 
-- avoid similarities; you must abstract over similar pieces of code and this chapter teaches you how to abstract.
+*) You must abstract to avoid similarities.
 
+*) Abstracting different versions of functions (functional abstraction) is one way to eliminate similarities from programs. That's how you get filter, map, reduce, etc.
 
+*) We make abstract functions and define specific functions in terms of the abstract ones.
 
--) tell about functional abstraction
+*) Functions can consume functions. Functions are values as well. That's the world of functional languages, baby.
 
--) tell about data abstraction
+*) We also can abstract data definitions. They begin to have parameters.
+   
+   ; A [List-of ITEM] is one of: 
+   ; – '() 
+   ; – (cons ITEM [List-of ITEM])
 
-a template for a parametric data definitions
+   ; A [CP H V] is a structure: 
+   ;   (make-point H V)
 
-; A [List-of ITEM] is one of: 
-; – '() 
-; – (cons ITEM [List-of ITEM])
+   ; A [List X Y] is a structure: 
+   ;   (cons X (cons Y '()))
+   
+   ; A [Maybe X] is one of: 
+   ; – #false 
+   ; – X
 
-example:
+   ; [Number -> Boolean] -> [List-of Number]
 
-; A [Maybe X] is one of: 
-; – #false 
-; – X
-
-*) Functions are values: arguments, results, items in lists.
-
-*) To abstract means to turn something concrete into a parameter.
-
--) ~Write here a shorter version of the receipe to create abstract functions.
+*) Signatures can also be abstracted. Here is a signature with parameters:
+   ; [X Y] [List-of X] -> [List-of Y]
+   ; [X Y] [List-of X] Y -> [Maybe Y]
 
 *) A signature describes a class of functions. For example, the signature [Number -> Boolean] describes a class of all functions that consume a Number and return a Boolean.
 
--) Signatures also can be abstracted. Here is a signature with parameters:
-   ; [X Y] [List-of X] -> [List-of Y]
+*) To abstract is to turn something concrete into a parameter.
 
--)
-; [List-of Number] [Number -> Number] -> [List-of Number]
-; [List-of String] [String -> String] -> [List-of String]
-; abstracting
-; [X] [List-of X] [X -> X] -> [List-of X]
-; instantiate for some data type IR
-; [List-of IR] [IR -> IR] -> [List-of IR]
-
-*) The elimination of similarities in favor of abstractions has many advantages. But, the single most important advantage is the creation of single points of control for some common functionality. Putting the definition for some functionality in one place makes it easy to maintain a program. When you discover a mistake, you have to go to just one place to fix it.
-
-*) A guideline: "Form an abstraction instead of copying and modifying any code."
-
-*) The chosen programming language affects a programmer’s ability to express solutions, and a future reader’s ability to recognize the design insight of the original creator.
+*) The single most important advantage of creating abstractions of single points of control for some common functionality. You fix a mistake in one place, you edit code in one place.
 
 *) To find a matching abstraction means to pick an abstraction whose purpose is more general than the one for the function to be designed.
 
-*) Inspect the code of your project for places where it can benefit from existing abstraction. Once you have simplified the code with the use of existing abstractions look for opportunities to create abstractions.
+*) A guideline: form an abstraction instead of copying and modifying any code.
+
+*) The use of an abstraction helps readers of your code to understand your intentions.
+
+*) The chosen programming language affects a programmer’s ability to express solutions, and a future reader’s ability to recognize the design insight of the original creator.
+
+*) Here is an example of a local definition.
+
+   (local ((define v1 1)
+           (define v2 2)
+           ; Number Number -> Number
+           (define (sum a b)
+             (+ a b)))
+          ; -IN-
+     (sum v1 v2))
+
+*) Repeated code patterns call for abstraction. To abstract means to factor out the repeated pieces of code—the abstraction—and to parameterize over the differences.
+
+*) All programming languages come with the means to build abstractions though some means are better than others. All programmers must get to know the means of abstractions and the abstractions that a language provides.
+
+*) Here is design recipe:
+   
+   1. To follow the design recipe for functions.
+   2. Exploit the signature and purpose statement to find a matching abstraction (filter, map, foldr).
+   3. Write down a template.
+   4. Finally, it is time to define the auxiliary function inside local.
+   5. The last step is to test the definition in the usual manner.
+
+*) Lambda functions come out:
+   
+   ((lambda (a b) (+ a b))
+     1 2)
+
+   (define sum (lambda (a b) (+ a b)))
+
+   (map (lambda (x) (add x 1))
+     '(1 2 3))
+
+*) Here is an interesting data definition:
+   ; A Shape is a function: 
+   ;   [Posn -> Boolean]
+   ; interpretation if s is a shape and p a Posn, (s p) 
+   ; produces #true if p is in of s, #false otherwise
+
+*) Reuse existing abstractions, avoid creating your own.
+
+*) Here are examples of for loops:
+	
+   (for/list ([i 4])
+     i)                  ;= (list 1 2 3)
+
+   (for/list ([i '(1 2 3)] [j '(10 20 30)])         <--- two lists are traversed concurently
+     (list i j))         ;= (list (list 1 10) (list 2 20) (list 3 30))
+
+   (for*/list ([i '(1 2)] [j '(10 20)])             <--- like nested loops
+     (list i j))         ;= (list (list 1 10) (list 1 20) (list 2 10) (list 2 20))
+
+   The meaning of these loops is clear from examples:
+
+   ; check two lists for equality
+   (for/and ([a '(1 2 3)] [b '(1 2 3)])
+     (= a b))
+
+   ; does the list contain a negative element?
+   (for/or ([a '(1 -2 3)])
+     (< a 0))
+
+   (for/sum ([c "APPLE"])          <--- traverses the string letter by letter
+     (string->int c))

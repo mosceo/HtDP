@@ -3,18 +3,14 @@
 #reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname draft) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require racket/string)
+(require 2htdp/universe)
+(require 2htdp/abstraction)
 ;====================
 
 
-(define (prefixes chars)
-  (local
-    ((define (f char pfx)
-       (cons (cons char (first pfx))
-             pfx)))
-    ; -- IN --
-    (foldl f
-           (list '())
-           chars)))
+; [List-of [List-of String]] -> [List-of Number]
+; determines the number of words on each line 
+(define (words-on-line lls)
+  (map length lls))
 
-
-(prefixes (list "a" "b" "c" "d"))
+(words-on-line (list (list 'a 'b 'c) (list) (list 'a 'b) (list) (list 'a)))
