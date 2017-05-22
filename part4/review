@@ -1,0 +1,1 @@
+*) For intertwined data definitions, create one template per data definition. Create them in parallel. Make sure they refer to each other in the same way the data definitions do.
