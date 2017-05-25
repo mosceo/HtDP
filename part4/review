@@ -1,1 +1,13 @@
+*) In this part we jump from self-referential data definitions to collections of data definitions with mutual references plus self-references.
+
 *) For intertwined data definitions, create one template per data definition. Create them in parallel. Make sure they refer to each other in the same way the data definitions do.
+
+*) You must design as many functions in parallel as there are data definitions. Each function specializes for one of the data definitions; all remaining arguments remain the same.
+
+*) Check for all self references and cross references. Look at the arrows in data definitions. For each arrow in the data definitions, include an arrow in the templates. Now replace the arrows with actual function calls.
+
+*) Each arrow leads to a function call. It is called symmetry.
+
+*) Iterative refinement comes form science. A scientist creates a model to represent some part of the world. Then he tests it and refines until the discrepancies are small enough.
+
+*) Complicated situations call for a refinement process to get to a sufficient data representation combined with the proper functions. The process starts with the essential pieces of information and adds others as needed.
