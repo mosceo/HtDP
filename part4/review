@@ -15,3 +15,30 @@
 *) XML is really a family of languages. People define dialects for specific channels of communication. For example, XHTML is the language for sending web content in XML format.
 
 *) You should design a separate function whenever you encounter a complex form of data, such as this list of items.
+
+*) You can visualize an S-expression as a tree (one or more branches) where each leaf is an Atom (Symbol, Number, Stirng) and each node is a list containing its children in order. Example:
+   '(10 (20 'apple ("one" 'two)) "apple")
+
+   An X-expression is a subset of S-expressions. It is a list, where the first element is always a symbol, then goes an optional list of attributes, then goes zero ore more S-expressions. Examples:
+   '(machine)
+   '(machine ((cores "2") (os "Linux")))
+   '(machine ((cores "2") (os "Linux")) (core) (core))
+
+   XEnum, XItem and XWord form a subset of X-epressions and represent unordered lists. Lists can be nested. Example:
+   '(ul
+     (li (word ((text "one"))))
+     (li (word ((text "two"))))
+     (li (ul
+          (li (word ((text "1")))))))
+
+*) ...
+
+
+
+
+
+
+
+
+
+   
