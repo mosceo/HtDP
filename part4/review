@@ -11,3 +11,7 @@
 *) Iterative refinement comes form science. A scientist creates a model to represent some part of the world. Then he tests it and refines until the discrepancies are small enough.
 
 *) Complicated situations call for a refinement process to get to a sufficient data representation combined with the proper functions. The process starts with the essential pieces of information and adds others as needed.
+
+*) XML is really a family of languages. People define dialects for specific channels of communication. For example, XHTML is the language for sending web content in XML format.
+
+*) You should design a separate function whenever you encounter a complex form of data, such as this list of items.

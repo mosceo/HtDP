@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |5|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname interpreter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/abstraction)
 ;--------------------------
 
@@ -111,6 +111,7 @@
 ; create a constant definition or a function definition
 ; from an S-expression
 (check-expect (da-def '(define x 10)) (list 'x 10))
+(check-expect (da-def '(define x (+ y 1))) (list 'x (make-add 'y 1)))
 (check-expect (da-def '(define (foo x) (+ x 1)))
               (list 'foo 'x (make-add 'x 1)))
 (check-error (da-def '(def x 10)))
@@ -118,7 +119,7 @@
 
 (define (da-def s)
   (cond [(define-con? s)
-         (list (second s) (third s))]
+         (list (second s) (parse (third s)))]
         [(define-fun? s)
          (list (first (second s)) (second (second s))
                (parse (third s)))]
@@ -147,7 +148,7 @@
 ; takes what represents an expression and what represents
 ; the definition area and computes the expression
 (define defs '((define x 1)
-               (define y 2)
+               (define y (+ x 1))
                (define pi 3)
                (define (inc x) (+ x 1))
                (define (sqr foo) (* foo foo))))
@@ -176,7 +177,8 @@
                      (eval (mul-right e) da))]
         [(fun? e) (eval-fun (assq (fun-name e) da)
                             (eval (fun-expr e) da)
-                            da)]))
+                            da)]
+        [else (error WRONG)]))
 
 
 ; BSL-def-fun BSL-value BSL-da -> BSL-value
