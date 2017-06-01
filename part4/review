@@ -31,9 +31,13 @@
      (li (ul
           (li (word ((text "1")))))))
 
-*) ...
+*) Programmers devise simple, special-purpose languages for administrators to configure the system. These special languages are also known as a domain-specific languages (DSL).
 
-
+*) A DSL can be a sublanguage of XML. Here is a possible configuration of a finite state machine:
+   <machine initial="white">
+     <action state="white" next="black" />
+     <action state="black" next="white" />
+   </machine>
 
 
 
@@ -42,3 +46,4 @@
 
 
    
+
