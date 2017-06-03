@@ -2,79 +2,88 @@
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |1|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/abstraction)
+;--------------------------
 
 
-(define-struct no-parent [])
-(define-struct child [father mother name date eyes])
-(define NP (make-no-parent))
-; A FT is one of: 
-; – NP
-; – (make-child FT FT String N String)
+;===========================================================
+; 23 Simultaneous Processing
+;===========================================================
+
+; [List-of Symbol] [List-of Number] -> [List-of '(Symbol Number)]
+; returns all permutations of symbols with numbers
+(check-expect (cross '(a) '(1)) '((a 1)))
+(check-expect (cross '(a) '(1 2)) '((a 1) (a 2)))
+(check-expect (cross '(a b) '(1)) '((a 1) (b 1)))
+(check-expect (cross '(a b c) '(1 2)) '((a 1) (a 2) (b 1) (b 2) (c 1) (c 2)))
+
+(define (cross sl nl)
+  (local ((define (cross-sym s nl)
+            (map (lambda (n) (list s n)) nl)))
+    (cond [(or (empty? sl) (empty? nl)) '()]
+          [else
+           (append (cross-sym (first sl) nl)
+                   (cross (rest sl) nl))])))
 
 
-; Oldest Generation:
-(define Carl (make-child NP NP "Carl" 1926 "green"))
-(define Bettina (make-child NP NP "Bettina" 1926 "green"))
+(define-struct phone-record [name number])
+; A PhoneRecord is a structure:
+;   (make-phone-record String String).
+
+
+; [List-of String] [List-of String] -> [List-of PhoneRecord]
+; combines names and phones pairwise into a list of phone records
+(check-expect (zip '("jane" "jack") '(10 20)) (list (make-phone-record "jane" 10)
+                                                    (make-phone-record "jack" 20)))
+
+(define (zip names phones)
+  (cond [(empty? names) '()]
+        [else (cons
+               (make-phone-record (first names) (first phones))
+               (zip (rest names) (rest phones)))]))
+
+
+;----------
+; Ex. 390 ;
+;----------
+
+(define-struct branch [left right])
  
-; Middle Generation:
-(define Adam (make-child Carl Bettina "Adam" 1950 "hazel"))
-(define Dave (make-child Carl Bettina "Dave" 1955 "black"))
-(define Eva (make-child Carl Bettina "Eva" 1965 "blue"))
-(define Fred (make-child NP NP "Fred" 1966 "pink"))
+; A TOS is one of:
+; – Symbol
+; – (make-branch TOS TOS)
  
-; Youngest Generation: 
-(define Gustav (make-child Fred Eva "Gustav" 1988 "brown"))
-
-
-; FT -> Boolean
-; does a-ftree contain a child
-; structure with "blue" in the eyes field
-(check-expect (blue-eyed-child? Carl) #false)
-(check-expect (blue-eyed-child? Gustav) #true)
+; A Direction is one of:
+; – 'left
+; – 'right
  
-(define (blue-eyed-child? a-ftree)
-  (cond
-    [(no-parent? a-ftree) #false]
-    [else (or (string=? (child-eyes a-ftree) "blue")
-              (blue-eyed-child? (child-father a-ftree))
-              (blue-eyed-child? (child-mother a-ftree)))]))
+; A list of Directions is also called a path. 
 
 
-; FT -> Boolean
-; does a-ftree contain a child
-; structure with "blue" in the eyes field
-(check-expect (count-persons Carl) 1)
-(check-expect (count-persons Gustav) 5)
-
-(define (count-persons ftree)
-  (cond
-    [(no-parent? ftree) 0]
-    [else (+ 1
-             (count-persons (child-father ftree))
-             (count-persons (child-mother ftree)))]))
+(define tree0 (make-branch 'A (make-branch 'B 'C)))
 
 
+; TOS [List-of Direction] -> TOS
+; follows a path and returns what is there
+(check-expect (tree-pick tree0 (list 'left)) 'A)
+(check-expect (tree-pick tree0 (list 'right 'left)) 'B)
+(check-expect (tree-pick tree0 (list 'right 'right)) 'C)
+(check-error  (tree-pick tree0 (list 'left 'left)))
 
-; FT -> Boolean
-; Consumes a family tree and produces a list of all eye colors in the tree.
-; (An eye color may occur more than once). 
+(define (tree-pick tree path)
+  (cond [(and (symbol? tree) (empty? path)) tree]
+        [(and (symbol? tree) (cons? path)) (error "end of tree")]
+        [(and (branch? tree) (empty? path)) tree]
+        [(and (branch? tree) (cons? path))
+         (cond [(equal? (first path) 'left)  (tree-pick (branch-left tree) (rest path))]
+               [(equal? (first path) 'right) (tree-pick (branch-right tree) (rest path))])]))
 
-(define (eye-colors ftree)
-  (cond
-    [(no-parent? ftree) '()]
-    [else (append (list (child-eyes ftree))
-                  (eye-colors (child-father ftree))
-                  (eye-colors (child-mother ftree)))]))
-
-
-; A FF (short for family forest) is a [List-of FT]
-; interpretation a family forest represents several
-; families (say a town) and their ancestor trees
+  
 
 
-; [List-of FT] -> Boolean
-; does the forest contain any child with "blue" eyes
- 
-(define (blue-eyed-child-in-forest? a-forest)
-  (for/or ([ft a-forest])
-    (blue-eyed-child? ft)))
+
+
+
+
+
+
+

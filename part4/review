@@ -39,9 +39,9 @@
      <action state="black" next="white" />
    </machine>
 
+*) It is better to design a function in a systematic manner and than simplify it, than creating a simplified version right away. Because in the first case there is a smaller chance for a bug.
 
-
-
+*) When a function consumes two complex data types, create a table that matches all cases for the first type with all cases for the second. For every cell in the table create a functional example and a cond clause. The key idea is to translate the data definitions into a table that shows all feasible and interesting combinations.
 
 
 
