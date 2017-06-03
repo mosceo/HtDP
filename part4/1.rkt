@@ -77,7 +77,28 @@
          (cond [(equal? (first path) 'left)  (tree-pick (branch-left tree) (rest path))]
                [(equal? (first path) 'right) (tree-pick (branch-right tree) (rest path))])]))
 
-  
+
+;----------
+; Ex. 394 ;
+;----------
+
+; [List-of Number] [List-of Number] -> [List-of Number]
+; Merges two lists that are sorted in ascending order.
+; A number occurs in the output as many times as it occurs
+; on the two input lists together.
+(check-expect (merge '() '()) '())
+(check-expect (merge '(1 1 3) '(0 0 5)) '(0 0 1 1 3 5))
+(check-expect (merge '(1 3 5) '(2 4 6)) '(1 2 3 4 5 6))
+
+(define (merge l1 l2)
+  (cond [(empty? l1) l2]
+        [(empty? l2) l1]
+        [ (< (first l1) (first l2))
+          (cons (first l1) (merge (rest l1) l2))]
+        [else (cons (first l2) (merge l1 (rest l2)))]))
+
+
+
 
 
 
