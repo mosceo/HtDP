@@ -2,4 +2,8 @@
 
 *) There is also generative recursion. The inputs of an algorithm represent a problem. An algorithm tends to re-arrange a problem into a set of several problems, solve those, and combine their solutions into one overall solution. Often some of these newly generated problems are the same kind of problem as the given one. In these cases, the algorithm is recursive but its recursion uses newly generated data not immediate parts of the input data.
 
+*) The choice of a data representation for a problem affects our thinking about the computational process. Be prepared to backtrack and to explore different data representations.
 
+*) The goal of testing is to discover and eliminate bugs.
+
+*) Generative recursion is not always superior to structural recursion. It is difficult to understand, requires some deep insight and sometimes slower (quick-sort vs. insertion-sort for small arrays). Experience shows that most functions employ structural design. When we encounter a situation that could use either structural or generative recursion, start with a structural version.
