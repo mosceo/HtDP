@@ -7,3 +7,17 @@
 *) The goal of testing is to discover and eliminate bugs.
 
 *) Generative recursion is not always superior to structural recursion. It is difficult to understand, requires some deep insight and sometimes slower (quick-sort vs. insertion-sort for small arrays). Experience shows that most functions employ structural design. When we encounter a situation that could use either structural or generative recursion, start with a structural version.
+
+*) When creating a function that applies generative recursion, in the purpose statement we should articulate not only WHAT the function does, but also HOW it does it (just a few words). Example:
+   ; Number -> Image
+   ; generative creates Sierpinski Δ of size side by generating
+   ; one for (/ side 2) and placing one copy above two copies
+
+*) Parsing is so complex and so central to the creation of full-fledged software applications, however, that most undergraduate curricula come with at least one course on parsing.
+
+
+
+
+
+
+
