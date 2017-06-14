@@ -15,11 +15,10 @@
 
 *) Parsing is so complex and so central to the creation of full-fledged software applications, that most undergraduate curricula come with at least one course on parsing.
 
-*) ISL+ treats numbers like 2.9999 as exact rational numbers and computation with them can become slow and take a lot of time. Use #i2.9999 if needed.
+*) ISL+ treats numbers like 2.9999 as exact rational numbers and computation with them can take a lot of time. Use #i2.9999 if needed.
 
-*) 
+*) While we have dubbed it generative recursion, most computer scientists refer to these functions as algorithms.
 
+*) Unlike structurally designed functions, algorithms may not terminate for some inputs. You should present some argument that the program will terminate and warn the readers of your code of "bad" input.
 
-
-
-
+*) For truly clever algorithms, software companies employ highly paid specialists, domain experts, and mathematicians. Programmers in general don't have to devise algorithms.
