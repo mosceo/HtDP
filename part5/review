@@ -22,3 +22,7 @@
 *) Unlike structurally designed functions, algorithms may not terminate for some inputs. You should present some argument that the program will terminate and warn the readers of your code of "bad" input.
 
 *) For truly clever algorithms, software companies employ highly paid specialists, domain experts, and mathematicians. Programmers in general don't have to devise algorithms.
+
+*) When programs grow large, data abstraction becomes a critical tool for the construction of a program’s components.
+
+*) 
