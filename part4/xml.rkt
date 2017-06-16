@@ -322,10 +322,10 @@
 
 ; read Xexpr from file
 ;(simulate-xmachine
-; (read-plain-xexpr "machine-configuration.xml"))
+; (read-plain-xexpr "files/machine-configuration.xml"))
 
 
-(define URL "stock.xml")
+(define URL "files/stock.xml")
 (define FONTSIZE 22) ; font size 
              
 (define-struct data [price delta])
@@ -360,10 +360,3 @@
 
 (define (get x co attr)
   "nice")
-
-
-
-
-
-
-

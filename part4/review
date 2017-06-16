@@ -1,4 +1,4 @@
-*) In this part we jump from self-referential data definitions to collections of data definitions with mutual references plus self-references.
+*) Common generalizations involve many self-references in one data definition or a bunch of data definitions that refer to each other. These forms of data have become ubiquitous
 
 *) For intertwined data definitions, create one template per data definition. Create them in parallel. Make sure they refer to each other in the same way the data definitions do.
 
@@ -8,7 +8,7 @@
 
 *) Each arrow leads to a function call. It is called symmetry.
 
-*) Iterative refinement comes form science. A scientist creates a model to represent some part of the world. Then he tests it and refines until the discrepancies are small enough.
+*) Iterative refinement comes form science. A scientist creates a model to represent some part of the world. Then he tests it and refines until the discrepancies with reality are small enough.
 
 *) Complicated situations call for a refinement process to get to a sufficient data representation combined with the proper functions. The process starts with the essential pieces of information and adds others as needed.
 
@@ -41,23 +41,17 @@
 
 *) Some functions can be simplified. It is better to design a function in a systematic manner and than simplify it, as opposed to creating a simplified version in the first place. The code will be less buggy.
 
+*) If a data definition A refers to a data definition B, then the template function-for-A refers to function-for-B in the exact same place and manner. Otherwise the design recipes work as before, function for function.
+
+*) When a function has to process two types of complex data, you need to distinguish three cases. First, the function may deal with one of the arguments as if it were atomic. Second, the two arguments are expected to have the same structure, and the function traverses them in a parallel manner. Third, the function may have to deal with all possible combinations separately. In this case, you make a two-dimensional table that along one dimension enumerates all kinds of data from one data definition and along the other one deals with the second kind of data.
+
 *) When a function consumes two complex data types, create a table that matches all cases for the first type with all cases for the second. For every cell in the table create a functional example and a cond clause. The key idea is to translate the data definitions into a table that shows all feasible and interesting combinations.
 
 *) If a function consumes three complex data types, you will have to imagine a three-dimensional table.
 
+*) You have now seen all forms of structural data that you are likely to encounter over the course of your career, though the details will differ.
+
 *) The teaching languages support both exact and inexact numbers. Arithmetic operations preserve exactness when possible; they produce an inexact result when necessary.
 
 *) Plain Racket interprets all decimal numbers as inexact numbers; it also renders all real numbers as decimals, regardless of whether they are exact or inexact. A programmer can force Racket to interpret numbers with a dot as exact by prefixing numerical constants with #e (#e3.14).
-
-*) ...
-
-
-
-
-
-
-
-
-
-
 
