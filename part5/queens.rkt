@@ -2,7 +2,16 @@
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname queens) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;===========================
-; The n queens puzzle
+; THE N QUEENS PUZZLE
+;===========================
+;
+; Given a chess board, put as many queens on it as you can.
+; By clicking on a square you can put or remove a queen.
+; The squares that are threatened by current queens have
+; a distinguished color, you can't put new queens on them.
+; There is also a function that solves the puzzle
+; by producing a board with queens.
+;
 ;===========================
 (require 2htdp/image)
 (require 2htdp/universe)
@@ -10,7 +19,7 @@
 
 
 ; A Square is a Posn
-; interpretation: (make-posn col row) denotes the square on the board
+; interpretation: (make-posn col row) denotes a square on the board
 
 ; A Queen is a Square
 
@@ -156,8 +165,6 @@
 ; each cell will have a 1 pixel border,
 ; so its real width on will differ by 2 pixels
 (define BWIDTH 52)
-; width of a separating line in pixels
-(define LINE-WIDTH 3)
 ; image of a queen
 (define QUEEN (bitmap "images/queen.png"))
 ; image of a square
@@ -229,10 +236,10 @@
 ;-------------------
 ; LAUNCH THE WORLD |
 ;-------------------
-;(big-bang
-; (board0 SIZE)
-; [on-mouse mouse-h]
-; [to-draw board->image])
+(big-bang
+ (board0 SIZE)
+ [on-mouse mouse-h]
+ [to-draw board->image])
 
 
 ;===========================
@@ -241,6 +248,7 @@
 
 ; Number -> Board
 ; solve a board of a given size (find a board of size N with N queens)
+; produce #false if a board can't be solved (for example, a board of size 2)
 (check-expect (length (board-queens (solve 1))) 1)
 (check-expect (solve 2) #false)
 (check-expect (solve 3) #false)
