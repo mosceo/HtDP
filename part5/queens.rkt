@@ -44,7 +44,7 @@
 ; ■ ◎ ■ ■
 
 (define loq-ex3 (list (make-posn 3 2) (make-posn 2 0) (make-posn 0 1) (make-posn 1 3)))
-(define board-ex3 (make-board 4 loq-ex1))
+(define board-ex3 (make-board 4 loq-ex3))
 
 
 ;===========================
@@ -226,9 +226,85 @@
   (make-posn (floor (/ x BWIDTH))
              (floor (/ y BWIDTH))))
 
+;-------------------
+; LAUNCH THE WORLD |
+;-------------------
+;(big-bang
+; (board0 SIZE)
+; [on-mouse mouse-h]
+; [to-draw board->image])
 
-; launch the world
-(big-bang
- (board0 SIZE)
- [on-mouse mouse-h]
- [to-draw board->image])
+
+;===========================
+; Solver
+;===========================
+
+; Number -> Board
+; solve a board of a given size (find a board of size N with N queens)
+(check-expect (length (board-queens (solve 1))) 1)
+(check-expect (solve 2) #false)
+(check-expect (solve 3) #false)
+(check-expect (length (board-queens (solve 4))) 4)
+(check-expect (length (board-queens (solve 5))) 5)
+
+(define (solve size)
+  (solve-board (board0 size) 0))
+
+
+; Board Number -> [Maybe Board]
+; given a partially solved board with queens on the first n columns,
+; solve this board or return #false
+(check-expect (solve-board board-ex1 2) #false)
+(check-expect (solve-board board-ex1 3) board-ex3)
+
+(define (solve-board board n)
+  (cond [(>= n (board-size board)) board]
+        [else
+         (local ((define candidates (put-queen-column board n)))
+           (r-ormap (lambda (c) (solve-board c (add1 n))) candidates))]))
+
+
+; Examples to test put-queen-column
+(define board-solve-0 (make-board 4 (list (make-posn 0 1))))
+(define board-solve-1 (list (make-board 4 (list (make-posn 1 3)
+                                                (make-posn 0 1)))))
+(define board-solve-2 (list (make-board 4 (list (make-posn 2 0) (make-posn 0 1)))
+                            (make-board 4 (list (make-posn 2 2) (make-posn 0 1)))))
+(define board-solve-3 (list (make-board 4 (list (make-posn 3 0) (make-posn 0 1)))
+                            (make-board 4 (list (make-posn 3 2) (make-posn 0 1)))
+                            (make-board 4 (list (make-posn 3 3) (make-posn 0 1)))))
+
+; Board Number -> [List-of Board]
+; given a board with a free column, produce a list
+; of possible boards with a queen at that column
+(check-expect (put-queen-column board-ex1 2) '())
+(check-expect (put-queen-column board-solve-0 1) board-solve-1)
+(check-expect (put-queen-column board-solve-0 2) board-solve-2)
+(check-expect (put-queen-column board-solve-0 3) board-solve-3)
+
+(define (put-queen-column board i)
+  (filter board?
+          (for/list ([j (board-size board)])
+            (local ((define candidate (make-posn i j)))
+              (cond [(add-queen? board candidate) (add-queen board candidate)]
+                    [else #false])))))
+
+
+; [Any -> Any] [List-of Any] -> [Maybe Any]
+; produce the first item in the list for which the given function
+; evaluates to not false, otherwise produce false
+(check-expect (r-ormap odd? (list)) #false)
+(check-expect (r-ormap (lambda (x) (if (= x 2) 200 #false)) (list 1 3 5)) #false)
+(check-expect (r-ormap (lambda (x) (if (= x 2) 200 #false)) (list 1 3 2)) 200)
+
+(define (r-ormap f lst)
+  (cond [(empty? lst) #false]
+        [else (local ((define val (f (first lst))))
+                (cond [(equal? val #false) (r-ormap f (rest lst))]
+                      [else val]))]))
+
+
+;----------------------
+; SHOW A SOLVED BOARD |
+;----------------------
+;(board->image (solve 12))
