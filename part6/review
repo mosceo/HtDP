@@ -1,0 +1,3 @@
+*) the only solution is to add an argument that represents the context of the function call. We call this additional argument an accumulator
+
+*) 
