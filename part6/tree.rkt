@@ -81,12 +81,7 @@
 
 
 
-
-
-
-
-
-
+(symbol-append a b)
 (define (undeclareds le0)
   (local (; Lam [List-of Symbol] -> Lam
           ; accumulator declareds is a list of all λ 
@@ -94,7 +89,9 @@
           (define (undeclareds/a le declareds)
             (cond
               [(is-var? le)
-               (if (member? le declareds) le '*undeclared)]
+               (if (member? le declareds)
+                   (symbol-append '*DEC: le)
+                   (symbol-append '*UNDEC: le))]
               [(is-λ? le)
                (local ((define para (λ-para le))
                        (define body (λ-body le))
@@ -109,9 +106,14 @@
     (undeclareds/a le0 '())))
 
 
+(check-expect (symbol-append 'foo 'bar) 'foobar)
+(define (symbol-append a b)
+  (string->symbol (string-append (symbol->string a)
+                                 (symbol->string b))))
 
 
-(undeclareds '((λ (x) x) (x y)))
+(define ex100 '(λ (*undeclared) ((λ (x) (x *undeclared)) y)))
+(undeclareds ex100)
 
 
 
