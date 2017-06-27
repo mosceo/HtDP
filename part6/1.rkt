@@ -4,14 +4,3 @@
 (require 2htdp/abstraction)
 ;==========================
 
-; ... -> ...
-; Creates a list of n elements by applying proc
-; to the integers from 0 to (sub1 n) in order.
-(check-expect (build-l*st 10 add1) (build-list 10 add1))
-
-
-(define (build-l*st n f)
-  (local ((define (build-l*st/a n a)
-            (cond [(< n 0) a]
-                  [else (build-l*st/a (sub1 n) (cons (f n) a))])))
-    (build-l*st/a (sub1 n) '())))
