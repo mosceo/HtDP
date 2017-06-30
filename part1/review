@@ -1,6 +1,6 @@
-;===============================================================================
-; Part 1. Main points.
-;===============================================================================
+;;==========================;;
+;; HtDP 2e, Part 1. Review. ;;
+;;==========================;;
 
 *) In general, when a problem refers to distinct tasks of computation, a program should consist of one function per task and a main function that puts it all together. Here is a simple slogan: Define one function per task.
 

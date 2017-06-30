@@ -1,3 +1,7 @@
+;;==========================;;
+;; HtDP 2e, Part 3. Review. ;;
+;;==========================;;
+
 *) Good programmers try to eliminate similarities as much as the programming language allows. Programmers write down their first drafts of programs, spot similarities (and other problems), and get rid of them.
 
 *) You must abstract to avoid similarities.

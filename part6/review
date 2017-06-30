@@ -1,6 +1,6 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; HtDP 2e, Part 6. Review of important ideas. ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;==========================;;
+;; HtDP 2e, Part 6. Review. ;;
+;;==========================;;
 
 *) If a function needs additional "knowledge" we introduce an additional argument called an accumulator. An accumulator provides some context to the call. For example, when a function that traverses a graph is called on a node, it would like to "know" which nodes have already been visited.
 

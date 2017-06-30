@@ -1,3 +1,7 @@
+;;==========================;;
+;; HtDP 2e, Part 5. Review. ;;
+;;==========================;;
+
 *) Functions typically decompose their arguments into their immediate structural components and then process those components. If one of these immediate components belongs to the same class of data as the input, the function is structurally recursive.
 
 *) There is also generative recursion. The inputs of an algorithm represent a problem. An algorithm tends to re-arrange a problem into a set of several problems, solve those, and combine their solutions into one overall solution. Often some of these newly generated problems are the same kind of problem as the given one. In these cases, the algorithm is recursive but its recursion uses newly generated data not immediate parts of the input data.
