@@ -1,24 +1,21 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname ball) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;=======================================
+;==================================================================================
 ; BOUNCING BALL
-;=======================================
-; A ball is moving on the canvas. When it hits the wall, it bounces.
-; Its speed decreases with time. You can throw the ball: click on it,
-; start dragging and click again. Its new direction and speed
-; will depend on the direction and speed of the mouse.
-;
-; Author: Roman Kunin (mosceo@gmail.com)
-; Source: https://github.com/mosceo/htdp
+;==================================================================================
+; A ball is moving on the canvas. If it hits the wall it bounces.
+; The speed of the ball decreases with time. You can throw the ball:
+; click on the ball, begin dragging it and click again while dragging.
+; Its new direction and speed will depend on how it was dragged.
 
 (require 2htdp/image)
 (require 2htdp/universe)
 
 
-;=======================================
+;==================================================================================
 ; Constants and data definitions
-;=======================================
+;==================================================================================
 
 (define WIDTH 600)
 (define HEIGHT 400)
@@ -55,9 +52,9 @@
                         #false (make-posn 5 5)))
 
 
-;=======================================
+;==================================================================================
 ; Tick
-;=======================================
+;==================================================================================
 
 ; WorldState -> WorldState
 ; time handler; moves the ball with every tick (if not dragged)
@@ -66,12 +63,10 @@
   (if (drag? w) w
       (world-given-pos w (next-pos w))))
 
-
 ; WorldState -> Posn
 ; computes next desirable position for the world
 (define (next-pos w)
   (add-delta (world-pos w) (world-delta w) MV))
-
 
 ; WorldState -> Boolean
 ; checks if the ball being dragged
@@ -79,7 +74,6 @@
 (check-expect (drag? TW2) #true)
 (define (drag? w)
   (world-drag w))
-
 
 ; WorldState Posn -> WorldState
 ; compute new world state given next desirable (possibly incorrect) position
@@ -90,31 +84,26 @@
               (world-drag w)
               (world-offset w)))
 
-
 ; Posn -> Posn
 ; decreases delta components to slow down the ball
 (check-within (slow-down (make-posn 50 100)) (make-posn (* SD 50) (* SD 100)) EPSILON)
 (define (slow-down delta)
   (mult delta SD))
 
-
 ; Posn -> Posn
 ; correct the position of the ball to be withing the bounds of the canvas
 (define (pos-bounds pos)
   (make-posn (x-bounds (posn-x pos)) (y-bounds (posn-y pos))))
-
 
 ; Number -> Number
 ; correct the x-coordinate of the ball to be withing the bounds
 (define (x-bounds x)
   (number-bounds x X-MIN X-MAX))
 
-
 ; Number -> Number
 ; corrects the y-coordinate of the ball to be withing the bounds
 (define (y-bounds y)
   (number-bounds y Y-MIN Y-MAX))
-
 
 ; Number Number Number -> Number
 ; compute new x, that is withing the given bounds
@@ -128,7 +117,6 @@
         [(> x max) max]
         [else x]))
 
-
 ; Number Number Number -> Boolean
 ; check if the number is not within given bounds
 (check-expect (number-out? 5 0 10) #false)
@@ -136,7 +124,6 @@
 (check-expect (number-out? 11 0 10) #true)
 (define (number-out? x min max)
   (or (< x min) (> x max)))
-
 
 ; Posn Posn -> Posn
 ; given a desirable position of the ball, compute new delta for the world
@@ -153,9 +140,9 @@
                  (- (posn-y delta)) (posn-y delta))))
 
 
-;=======================================
+;==================================================================================
 ; Mouse
-;=======================================
+;==================================================================================
 
 ; WorldState Number Number MouseEvent -> WorldState
 ; handle mouse events
@@ -168,12 +155,10 @@
          (move-drag w x y)]
         [else w]))
 
-
 ; WorldState Number Number -> Boolean
 ; check if the mouse cursor is over the ball
 (define (over-ball? w x y)
   (< (distance (world-pos w) (make-posn x y)) RADIUS))
-
 
 ; WorldState Number Number -> WorldState
 ; given mouse coordinates, change the world state with the moving ball
@@ -184,7 +169,6 @@
               #true
               (minus (make-posn x y) (world-pos w))))
 
-
 ; WorldState Number Number -> WorldState
 ; given mouse coordinates and the world state where the ball is being dragged,
 ; compute new world state
@@ -193,7 +177,6 @@
               (compute-delta w x y)
               #true
               (world-offset w)))
-
 
 ; WorldState Number Number -> WorldState
 ; given mouse coordinates, change the world state where the ball is being dragged,
@@ -204,13 +187,11 @@
               #false
               (make-posn 0 0)))
 
-
 ; WorldState Number Number -> Posn
 ; given mouse coordinates and the world state where the ball is being dragged,
 ; compute new position of the ball
 (define (drag-new-pos w x y)
   (pos-bounds (minus (make-posn x y) (world-offset w))))
-
 
 ; WorldState Number Number -> Posn
 ; given mouse coordinates and the world state where the ball is being dragged,
@@ -220,9 +201,9 @@
                (world-pos w)) THR))
 
 
-;=======================================
+;==================================================================================
 ; Render
-;=======================================
+;==================================================================================
 
 ; WorldState -> Image
 ; renders a given world state
@@ -230,9 +211,9 @@
   (place-image BALL (posn-x (world-pos w)) (posn-y (world-pos w)) BACKGROUND))
 
 
-;=======================================
-; Working with Posn
-;=======================================
+;==================================================================================
+; Working with Posn's
+;==================================================================================
 
 ; Posn Posn -> Posn
 ; add two posns together
@@ -241,7 +222,6 @@
   (make-posn (+ (posn-x p) (posn-x q))
              (+ (posn-y p) (posn-y q))))
 
-
 ; Posn Posn -> Posn
 ; subtract second posn from the first
 (check-expect (minus (make-posn 5 4) (make-posn 3 1)) (make-posn 2 3))
@@ -249,13 +229,11 @@
   (make-posn (- (posn-x p) (posn-x q))
              (- (posn-y p) (posn-y q))))
 
-
 ; Posn Number -> Posn
 ; multiply posn components by a number
 (check-expect (mult (make-posn 1 2) 3) (make-posn 3 6))
 (define (mult p k)
   (make-posn (* k (posn-x p)) (* k (posn-y p))))
-
 
 ; Posn Posn -> Posn
 ; add second posn multiplied by a number to the first posn
@@ -263,7 +241,6 @@
 (define (add-delta p1 p2 c)
   (make-posn (+ (posn-x p1) (* c (posn-x p2)))
              (+ (posn-y p1) (* c (posn-y p2)))))
-
 
 ; Posn Posn -> Number
 ; computes the distance between two posns
@@ -275,12 +252,16 @@
            (sqr (- (posn-y p1) (posn-y p2))))))
 
 
-;=======================================
+;==================================================================================
 ; Launch the world
-;=======================================
+;==================================================================================
 
 (big-bang
  (make-world (make-posn 100 100) (make-posn 100 100) #false (make-posn 0 0))
  [on-tick  tick]
  [on-mouse mouse]
  [to-draw  render])
+
+
+
+
