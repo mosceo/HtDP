@@ -1,6 +1,3 @@
-How to Design Programs
-======================
-
 This repository contains games that I made while reading «*How to Design Programs, 2e*» by *Matthias Felleisen*.
 I also wrote a review for each part of the book that collects the main ideas from the part.
 
