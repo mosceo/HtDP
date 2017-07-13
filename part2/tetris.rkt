@@ -1,19 +1,21 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-abbr-reader.ss" "lang")((modname tetris) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;===============================================================================
+;=======================================
 ; TETRIS
-;===============================================================================
-; A simple tetris game.
-
+;=======================================
+; A simple tetris implementation.
+;
+; Author: Roman Kunin (mosceo@gmail.com)
+; Source: https://github.com/mosceo/htdp
 
 (require 2htdp/image)
 (require 2htdp/universe)
 
 
-;===============================================================================
+;=======================================
 ; World constants
-;===============================================================================
+;=======================================
 
 ; size of the board in number of blocks
 (define BW 12)
@@ -29,9 +31,9 @@
 (define RATE 0.25)
 
 
-;===============================================================================
+;=======================================
 ; Data definitions
-;===============================================================================
+;=======================================
 
 ;--------
 ; Block ;
@@ -96,9 +98,9 @@
 ; and a boolean which defines whether the game is over
 
 
-;===============================================================================
+;=======================================
 ; Pieces
-;===============================================================================
+;=======================================
 
 ; □ ■ □
 ; ■ ■ ■
@@ -139,9 +141,9 @@
 (define PIECES (list PIECE1 PIECE2 PIECE3 PIECE4 PIECE5 PIECE6 PIECE7))
 
 
-;===============================================================================
+;=======================================
 ; Create a game
-;===============================================================================
+;=======================================
 
 ; Number -> Board
 ; create an empty board with a given number of rows
@@ -189,9 +191,9 @@
   (make-game (empty-board BH) (new-gamepiece (random-piece 0)) #false))
 
 
-;===============================================================================
+;=======================================
 ; Draw
-;===============================================================================
+;=======================================
 
 ; Game -> Image
 ; produce an image of a given game
@@ -300,9 +302,9 @@
              (+ (posn-y p1) (posn-y p2))))
 
 
-;===============================================================================
+;=======================================
 ; Tick
-;===============================================================================
+;=======================================
 
 ; Game -> Game
 ; handle tick events
@@ -446,12 +448,6 @@
 
 
 ; GamePiece Board -> Boolean
-; check if a given gamepiece fits on a given board
-;(define (gp-fits? gp board)
-;  (bs-legal? (gp->blocks gp) board))
-
-
-; GamePiece Board -> Boolean
 ; check if a given gamepiece is legally positioned
 ; (doesn't overlap with other blocks and inside/above the board)
 (define (gp-legal? gp board)
@@ -543,9 +539,9 @@
        (< (posn-y b) BH)))
 
 
-;===============================================================================
+;=======================================
 ; Key
-;===============================================================================
+;=======================================
 
 ; Game KeyEvent -> Game
 ; handle key events
@@ -554,7 +550,7 @@
         [(key=? event "left") (left-event g)]
         [(key=? event "right") (right-event g)]
         [(key=? event "down") (down-event g)]
-        [(key=? event " ") (space-event g)]
+        [(key=? event "up") (up-event g)]
         [else g]))
 
 
@@ -582,7 +578,7 @@
 
 ; Game -> Game
 ; rotate the gamepiece in a given game (if possible)
-(define (space-event g)
+(define (up-event g)
   (set-gp g (gp-rotate (game-gamepiece g))))
 
 
@@ -620,9 +616,9 @@
      (posn-x bl)))
 
 
-;===============================================================================
+;=======================================
 ; Launch the world
-;===============================================================================
+;=======================================
 
 (big-bang
   INIT-GAME
