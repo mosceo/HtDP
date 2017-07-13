@@ -13,4 +13,4 @@ Also I wrote a review for each chapter of the book that contains the main ideas 
 3. **Space Invaders** — Try to hit a landing UFO with a missile.
 4. **Snake** — Control a snake that eats fruit and grows.
 5. **Tetris** — A full-fledged version of tetris.
-6. **Queens Puzzle** — Place N queens on an NxN chessboard.
+6. **The N Queens Puzzle** — Place N queens on an NxN chessboard.
