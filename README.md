@@ -8,9 +8,9 @@ Also I wrote a review for each chapter of the book that contains the main ideas 
 
 ![Screenshots of the games](screenshot.png)
 
-1. **Bouncing Ball** &nbsp;&nbsp;&nbsp;&nbsp;Use the mouse to throw a ball that bounces and slows down.
-2. **Happy Cat** Feed and stroke a cat to make it happier.
-3. **Space Invaders** Try to hit a landing UFO with a missile.
-4. **Snake** Control a snake that eats fruit and grows.
-5. **Tetris** A full-fledged version of tetris.
-6. **Queens Puzzle** Place N queens on an NxN chess board.
+1. **Bouncing Ball** &nbsp;&nbsp; Use the mouse to throw a ball that bounces and slows down.
+2. **Happy Cat** &nbsp;&nbsp; Feed and stroke a cat to make it happier.
+3. **Space Invaders** &nbsp;&nbsp; Try to hit a landing UFO with a missile.
+4. **Snake** &nbsp;&nbsp; Control a snake that eats fruit and grows.
+5. **Tetris** &nbsp;&nbsp; A full-fledged version of tetris.
+6. **Queens Puzzle** &nbsp;&nbsp; Place N queens on an NxN chess board.
