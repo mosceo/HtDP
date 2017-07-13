@@ -1,22 +1,27 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname queens) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;===========================
+;=======================================
 ; THE N QUEENS PUZZLE
-;===========================
+;=======================================
+; Given a chessboard, place as many queens on it as you can.
+; By clicking on a square you can place or remove a queen.
+; Threatened squares have a different color.
 ;
-; Given a chess board, put as many queens on it as you can.
-; By clicking on a square you can put or remove a queen.
-; The squares that are threatened by current queens have
-; a distinguished color, you can't put new queens on them.
 ; There is also a function that solves the puzzle
 ; by producing a board with queens.
 ;
-;===========================
+; Author: Roman Kunin (mosceo@gmail.com)
+; Source: https://github.com/mosceo/htdp
+
 (require 2htdp/image)
 (require 2htdp/universe)
 (require 2htdp/abstraction)
 
+
+;=======================================
+; Constants and data definitions
+;=======================================
 
 ; A Square is a Posn
 ; interpretation: (make-posn col row) denotes a square on the board
@@ -56,9 +61,9 @@
 (define board-ex3 (make-board 4 loq-ex3))
 
 
-;===========================
+;=======================================
 ; Board
-;===========================
+;=======================================
 
 ; Size -> Board 
 ; creates the initial n by n board
@@ -154,9 +159,9 @@
          (abs (- (posn-y s1) (posn-y s2))))))
 
 
-;===========================
+;=======================================
 ; Graphics
-;===========================
+;=======================================
 
 ; board size
 (define SIZE 8)
@@ -166,7 +171,7 @@
 ; so its real width on will differ by 2 pixels
 (define BWIDTH 52)
 ; image of a queen
-(define QUEEN (bitmap "images/queen.png"))
+(define QUEEN (bitmap "queens/queen.png"))
 ; image of a square
 (define SQUARE (overlay (square WIDTH "solid" "white")
                         (square (+ WIDTH 2) "solid" "black")))
@@ -203,9 +208,9 @@
         [else SQUARE]))
 
 
-;===========================
+;=======================================
 ; Big-bang
-;===========================
+;=======================================
 
 ; Board Number Number MouseEvent
 ; when a user clicks on a square, try to add a queen there,
@@ -242,9 +247,9 @@
  [to-draw board->image])
 
 
-;===========================
+;=======================================
 ; Solver
-;===========================
+;=======================================
 
 ; Number -> Board
 ; solve a board of a given size (find a board of size N with N queens)
