@@ -6,8 +6,8 @@ Also I wrote a review for each chapter of the book that contains the main ideas 
 
 ## The list of my games:
 
-![Screenshots of my games](games.png)
+![Screenshots of my games](screenshot.png)
 
-1. *Bouncing Ball* Description
-2. *Cat* Description
-3. *Space Invaders* Description
+1. **Bouncing Ball** Description
+2. **Cat** Description
+3. **Space Invaders** Description
