@@ -1,30 +1,27 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname invaders) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;=======================================
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname space) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;==================================================================================
 ; SPACE INVADERS
-;=======================================
-; An UFO is descending and changing its direction randomly.
-; You have to hit it with a missile to save the planet from invaders.
-; Press "left" or "right" to move the rocket launcher.
-; When you press "space", the launcher fires a missile.
-;
-; Author: Roman Kunin (mosceo@gmail.com)
-; Source: https://github.com/mosceo/htdp
+;==================================================================================
+; An UFO is descending. The rocket launcher fires missiles.
+; ...
+; ...
+; ...
 
 (require 2htdp/image)
 (require 2htdp/universe)
 
 
-;=======================================
+;==================================================================================
 ; World constants
-;=======================================
+;==================================================================================
 
 ; > Canvas
 (define WIDTH 400)
 (define HEIGHT 600)
-(define CLOUD (bitmap "invaders/cloud.png"))
-(define TREE (bitmap "invaders/tree.png"))
+(define CLOUD (bitmap "images/cloud.png"))
+(define TREE (bitmap "images/tree.png"))
 ; the y-coordinate for trees
 (define TREE-Y (- HEIGHT (/ (image-height TREE) 2)))
 (define LEFT-MOUNTAIN (polygon (list (make-posn 0 (* HEIGHT 0.75))
@@ -60,14 +57,14 @@
 
 
 ; > Missile launcher
-(define LAUNCHER (bitmap "invaders/car.png"))
+(define LAUNCHER (bitmap "images/car.png"))
 ; it moves by that many pixels when "left" or "right" is pressed
 (define LAUNCHER-DX 5)
 ; the y-coordinate of the launcher (never changes)
 (define LAUNCHER-Y (- HEIGHT (/ (image-height LAUNCHER) 2)))
 
 ; > UFO
-(define UFO (bitmap "invaders/ufo.png"))
+(define UFO (bitmap "images/ufo.png"))
 (define UFO-WIDTH (image-width UFO))
 (define UFO-RADIUS (/ (image-height UFO) 2))
 ; UFO changes its x-direction randomly; to achive this we introduce
@@ -88,7 +85,7 @@
 (define UFO-Y (- (image-height UFO)))
 
 ; > Missile
-(define MISSILE (bitmap "invaders/missile.png"))
+(define MISSILE (bitmap "images/missile.png"))
 (define MSL-VEL -500)
 (define MSL-VEL-VEC (make-posn 0 MSL-VEL))
 ; initial y-coordinate for a missile
@@ -101,9 +98,9 @@
 (define EPSILON 0.00001)
 
 
-;=======================================
+;==================================================================================
 ; Data definitions
-;=======================================
+;==================================================================================
 
 ; PosnOrFalse is one of:
 ; - (make-posn x y)
@@ -126,9 +123,9 @@
 ; when it moves 244 pixels along the x-coordinate, it changes its x-direction
 
 
-;=======================================
+;==================================================================================
 ; Render
-;=======================================
+;==================================================================================
 
 ; WorldState -> Image
 ; render a given world state
@@ -140,25 +137,21 @@
                ws (draw-launcher
                    ws BACKGROUND))))))
 
-
 ; WS Image -> Image
 ; check if game is over and make appropriate rendering
 (define (draw-game-over ws im)
   (cond [(game-over? ws) (overlay (text "GAME OVER" 40 "black") im)]
         [else im]))
 
-
 ; WS Image -> Image
 ; render launcher on the screen
 (define (draw-launcher ws im)
   (place-image LAUNCHER (ws-launcher ws) LAUNCHER-Y im))
 
-
 ; WS Image -> Image
 ; render UFO on the screen
 (define (draw-ufo ws im)
   (place-image UFO (posn-x (ufo-pos (ws-ufo ws))) (posn-y (ufo-pos (ws-ufo ws))) im))
-
 
 ; WS Image -> Image
 ; if there is a missile, render it
@@ -169,7 +162,6 @@
                       im)]
         [else im]))
 
-
 ; WS Image -> Image
 ; render the score on the screen
 (define (draw-score ws im)
@@ -179,16 +171,15 @@
    (- WIDTH 30) 30
    im))
 
-
 ; WS -> Boolean
 ; check if there is a missile in the world
 (define (missile? ws)
   (not (boolean? (ws-missile ws))))
 
 
-;=======================================
+;==================================================================================
 ; Tick handler
-;=======================================
+;==================================================================================
 
 ; WS -> WS
 ; handle clock events (by default 28 ticks per second)
@@ -205,12 +196,10 @@
                   (missile-next-state (ws-missile ws)) ; move missile
                   (ws-score ws))]))
 
-
 ; WS -> Boolean
 ; check if game is over (UFO landed)
 (define (game-over? ws)
   (>= (posn-y (ufo-pos (ws-ufo ws))) UFO-LANDING-Y)) 
-
 
 ; WS -> Boolean
 ; check if the missile hit the UFO
@@ -220,7 +209,6 @@
                     (ws-missile ws))
           UFO-RADIUS)))
 
-
 ; UFO -> UFO
 ; compute new UFO from the previous (destroyed) one;
 ; new UFO is moving faster
@@ -229,7 +217,6 @@
             (make-posn (* UFO-SPEEDUP (posn-x (ufo-vel ufo)))
                        (* UFO-SPEEDUP (posn-y (ufo-vel ufo))))
             (random2 UFO-MILEAGE-MIN UFO-MILEAGE-MAX)))
-
 
 ; UFO -> UFO
 ; compute the UFO's next state
@@ -242,7 +229,6 @@
               (- (ufo-mileage ufo)
                  (abs (* FRAC (posn-x (ufo-vel ufo)))))))))
 
-
 ; UFO -> UFO
 ; keep UFO inside the canvas; if it tried to get out, change its x-direction
 (define (ufo-correct-pos ufo)
@@ -254,7 +240,6 @@
                    (ufo-mileage ufo))]
         [else ufo]))
 
-
 ; UFO -> UFO
 ; if mileage is negative, change direction and set new mileage
 (define (ufo-check-mileage ufo)
@@ -264,19 +249,16 @@
                    (random2 UFO-MILEAGE-MIN UFO-MILEAGE-MAX))]
         [else ufo]))
 
-
 ; Posn Posn -> Posn
 ; update the position vector every 1 clock tick
 (define (pos+vel pos vel)
   (make-posn (+ (posn-x pos) (* FRAC (posn-x vel)))
              (+ (posn-y pos) (* FRAC (posn-y vel)))))
 
-
 ; Posn -> Posn
 ; change the x direction of the velocity vector
 (define (redirect vel)
   (make-posn (- (posn-x vel)) (posn-y vel)))
-
 
 ; PosnOrFalse -> PosnOrFalse
 ; compute next state fot the missile
@@ -285,12 +267,10 @@
         [(< (posn-y msl) 0) #false]
         [else (pos+vel msl MSL-VEL-VEC)]))
 
-
 ; Number Number -> Number
 ; compute random number between 'min' and 'max'
 (define (random2 min max)
   (+ (random (- max min)) min))
-
 
 ; Posn Posn -> Number
 ; compute the distance between two points
@@ -302,9 +282,9 @@
            (sqr (- (posn-y p1) (posn-y p2))))))
 
 
-;=======================================
+;==================================================================================
 ; Key handler
-;=======================================
+;==================================================================================
 
 ; WS KeyEvent -> WS
 ; handle key events
@@ -315,7 +295,6 @@
         [(key=? event " ") (fire-missile ws)]
         [else ws]))
 
-
 ; WS Number -> WS
 ; move launcher along x-coordinate for a given amount
 (define (move-launcher ws dx)
@@ -323,7 +302,6 @@
            (ws-ufo ws)
            (ws-missile ws)
            (ws-score ws)))
-
 
 ; WS -> WS
 ; launcher fires a missile;
@@ -334,7 +312,6 @@
                        (ws-ufo ws)
                        (make-posn (ws-launcher ws) MISSILE-Y)
                        (ws-score ws))]))
-
 
 ; Number Number Number -> Number
 ; compute new x, that is withing the given bounds
@@ -350,9 +327,9 @@
         [else x]))
 
 
-;=======================================
+;==================================================================================
 ; Launch the world
-;=======================================
+;==================================================================================
 
 (big-bang
  (make-ws (/ WIDTH 2)
