@@ -1,16 +1,15 @@
-======================================
- HtDP 2e, Preface & Prologue. Review.
-======================================
+HtDP 2e, Preface & Prologue. Review.
+====================================
 
-*) A good programmer designs programs. A bad programmer tinkers until the program
+* A good programmer designs programs. A bad programmer tinkers until the program
 seems to work (garage programming).
 
-*) Coding is just a part of programming. Before we even begin writing code
+* Coding is just a part of programming. Before we even begin writing code
 we should do a lot of work to design the application. We should develop programs
 in a *systematic* manner. Which means we have a strict plan
 what to do and design comes before coding.
 
-*) Functions are the basic building blocks. The key is to discover which functions
+* Functions are the basic building blocks. The key is to discover which functions
 are needed, how to connect them, and how to build them from basic ingredients.
 
 *) This book deals with just two recipes for complete programs: one for programs
