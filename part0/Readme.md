@@ -39,16 +39,16 @@ We can apply them in other professions, not only in computer science.
 should require an equally small change.
 
 * Every time you re-organize your program to prepare yourself for likely future
-change requests, you refactor your program.
+change requests, you *refactor* your program.
 
 * Do you see repeated expressions in the code? Do you see similar blocks of logic?
-Eliminate them all by creating new fnctions and constant definitions.
+Eliminate them all by creating new functions and constant definitions.
 
 * Do you see a number in an expression? After some time you may have no idea what it stands for.
 These numbers are called *magic numbers*. Get rid of them by creating constant definitions.
 `(* 20 t)` becomes `(* SPEED t)`.
 
-* In Star Wars master Yoda says a very deep thing: "You must unlearn what you have learned".
+* In Star Wars master Yoda says a very deep thing: "You must *unlearn* what you have learned".
 When we were learning programming, we were concentrating on the mechanics of the language
 and picked up some bad practices. And now we have to "unlearn" them to learn good program design.
 You see, a way from bad programmer to good programmer can be *longer* than from no programmer
