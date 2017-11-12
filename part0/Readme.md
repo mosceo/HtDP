@@ -1,7 +1,7 @@
 HtDP 2e, Preface & Prologue. Review.
 ====================================
 
-* A good programmer designs programs. A bad programmer tinkers until the program
+* A good programmer *designs* programs. A bad programmer tinkers until the program
 seems to work (garage programming).
 
 * Coding is just a part of programming. Before we even begin writing code
