@@ -3,10 +3,12 @@
 ======================================
 
 *) A good programmer designs programs. A bad programmer tinkers until the program
-seems to work (garage programming). Coding is just a part of programming.
-Before we even begin writing code we should do a lot of work to design the application.
-We should develop programs in a *systematic* manner. Which means we have
-a strict plan what to do and design comes before coding.
+seems to work (garage programming).
+
+*) Coding is just a part of programming. Before we even begin writing code
+we should do a lot of work to design the application. We should develop programs
+in a *systematic* manner. Which means we have a strict plan
+what to do and design comes before coding.
 
 *) Functions are the basic building blocks. The key is to discover which functions
 are needed, how to connect them, and how to build them from basic ingredients.
@@ -16,7 +18,7 @@ with GUI and one for batch programs. In contrast, design recipes for functions c
 in a wide variety of flavors (depends on the data consumed by the function).
 
 *) Getting everything right at once is nearly impossible. Instead, computer scientists
-apply iterative refinement. In essence, iterative refinement recommends stripping away
+apply *iterative refinement*. In essence, iterative refinement recommends stripping away
 all inessential details at first and finding a solution for the remaining core problem.
 A refinement step adds in one of these omitted details and re-solves the expanded problem,
 using the existing solution as much as possible.
@@ -44,12 +46,12 @@ change requests, you refactor your program.
 Eliminate them all by creating new fnctions and constant definitions.
 
 *) Do you see a number in an expression? After some time you may have no idea what it stands for.
-These numbers are called magic numbers. Get rid of them by creating constant definitions.
+These numbers are called *magic numbers*. Get rid of them by creating constant definitions.
 `(* 20 t)` becomes `(* SPEED t)`.
 
-*) In Star Wars master Yoda says a very deep thing: "you must unlearn what you have learned".
+*) In Star Wars master Yoda says a very deep thing: "You must unlearn what you have learned".
 When we were learning programming, we were concentrating on the mechanics of the language
 and picked up some bad practices. And now we have to "unlearn" them to learn good program design.
-You see, a way from bad programmer to good programmer can be longer than from no programmer
+You see, a way from bad programmer to good programmer can be *longer* than from no programmer
 to good programmer. Because we have to unlearn all of this.
 
