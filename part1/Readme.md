@@ -22,8 +22,7 @@ HtDP 2e, Part 1. Review.
   Then it processes the data. When it is finished, it turns the resulting data into information again.
 
 * The first question we have to answer is how to represent information as data in our program.
-  We write data definitions that describe classes of data.
-   
+  We write data definitions that describe classes of data.  
   Examples:
 
   ```racket
