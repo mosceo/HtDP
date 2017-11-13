@@ -1,14 +1,14 @@
 HtDP 2e, Part 1. Review.
 ========================
 
-* In general, when a problem refers to distinct tasks of computation, a program
-should consist of one function per task and a main function that puts it all together.
+* In general, when a problem refers to distinct tasks of computation,
+a program should consist of one function per task and a main function that puts it all together.
 Here is a simple slogan: *Define one function per task*.
 
 * For every constant mentioned in a problem statement, introduce one constant definition.
 
-* A *batch program* consumes all of its inputs at once (maybe from files)
-and computes its result. An interactive program consumes some of its inputs,
+* A *batch program* consumes all of its inputs at once (maybe from files) and computes its result.
+An interactive program consumes some of its inputs,
 computes, produces some output, consumes more input, and so on.
 
 * A good program comes with a short write-up that explains what it does,
@@ -26,35 +26,42 @@ data into information again.
 We write data definitions that describe classes of data.
    
 Examples:
-   ```
-   ; A PositiveNumber is a Number greater or equal to 0. 
-   ; A TrafficLight is one of the following Strings:
-   ; – "red"
-   ; – "green"
-   ; – "yellow"
-   ; interpretation the three strings represent the three 
-   ; possible states that a traffic light may assume
-   ```
+
+```racket
+; A PositiveNumber is a Number greater or equal to 0. 
+; A TrafficLight is one of the following Strings:
+; – "red"
+; – "green"
+; – "yellow"
+; interpretation the three strings represent the three 
+; possible states that a traffic light may assume
+```
 
 * There are six steps in the *design recipe for functions*:
-   1. From Problem Analysis to Data Definitions
-      Identify the information that must be represented and how it is represented
-      in the chosen programming language.
-      Formulate data definitions and illustrate them with examples.
-   2. Signature, Purpose Statement, Header
-      State which data the desired function consumes and produces.
-      Articulate what the function computes as a concise one-line statement.
-      Define a stub that lives up to the signature.
-   3. Functional Examples
-      Work through examples that illustrate the function’s purpose.
-   4. Function Template
-      Translate the data definitions into an outline of the function.
-   5. Function Definition
-      Fill in the gaps in the function template. Exploit the purpose statement and the examples.
-   6. Testing
-      Articulate the examples as tests and ensure that the function passes all.
-      Doing so discovers mistakes and also helps others read and understand the definition
-      when the need arises—and it will arise for any serious program.
+  
+  1. **From Problem Analysis to Data Definitions**
+     Identify the information that must be represented and how it is represented
+     in the chosen programming language.
+     Formulate data definitions and illustrate them with examples.
+  
+  2. **Signature, Purpose Statement, Header**
+     State which data the desired function consumes and produces.
+     Articulate what the function computes as a concise one-line statement.
+     Define a stub that lives up to the signature.
+  
+  3. **Functional Examples**
+     Work through examples that illustrate the function’s purpose.
+  
+  4. **Function Template**
+     Translate the data definitions into an outline of the function.
+  
+  5. **Function Definition**
+     Fill in the gaps in the function template. Exploit the purpose statement and the examples.
+  
+  6. **Testing**
+     Articulate the examples as tests and ensure that the function passes all.
+     Doing so discovers mistakes and also helps others read and understand the definition
+     when the need arises—and it will arise for any serious program.
 
 * Here are the components that a fuction consists of.
 
