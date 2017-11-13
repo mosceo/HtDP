@@ -26,15 +26,17 @@ data into information again.
 We write data definitions that describe classes of data.
 
     Examples:
-
+    ```
     ; A PositiveNumber is a Number greater or equal to 0. 
-
+    ```
+    ```
     ; A TrafficLight is one of the following Strings:
     ; – "red"
     ; – "green"
     ; – "yellow"
     ; interpretation the three strings represent the three 
     ; possible states that a traffic light may assume
+    ```
 
 * There are six steps in the design recipe for functions:
    1. From Problem Analysis to Data Definitions
