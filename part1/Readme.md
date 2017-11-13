@@ -3,11 +3,11 @@ HtDP 2e, Part 1. Review.
 
 * In general, when a problem refers to distinct tasks of computation, a program
 should consist of one function per task and a main function that puts it all together.
-Here is a simple slogan: Define one function per task.
+Here is a simple slogan: *Define one function per task*.
 
 * For every constant mentioned in a problem statement, introduce one constant definition.
 
-* A batch program consumes all of its inputs at once (maybe from files)
+* A *batch program* consumes all of its inputs at once (maybe from files)
 and computes its result. An interactive program consumes some of its inputs,
 computes, produces some output, consumes more input, and so on.
 
@@ -59,7 +59,7 @@ We write data definitions that describe classes of data.
       when the need arises—and it will arise for any serious program.
 
 * Here are the components that a fuction consists of.
-    ```
+    ```lisp
     ; Number -> Number                                signature
     ; computes the area of a square with side len     purpose statement
     ; given: 2, expect: 4                             examples
@@ -99,57 +99,63 @@ We write data definitions that describe classes of data.
        [else ...]))
 
 * An interval is a description of a class of numbers via boundaries.
+    ```
+    ; A WorldState falls into one of three intervals: 
+    ; – between 0 and CLOSE
+    ; – between CLOSE and HEIGHT
+    ; – below HEIGHT
+    ```
 
-   ; A WorldState falls into one of three intervals: 
-   ; – between 0 and CLOSE
-   ; – between CLOSE and HEIGHT
-   ; – below HEIGHT
-   
-   In a function template the number of cond clauses is equal to the number of intervals.
+    In a function template the number of cond clauses is equal to the number of intervals.
 
-   ; WorldState -> WorldState
-   (define (f y)
-     (cond
-       [(<= 0 y CLOSE) ...]
-       [(<= CLOSE y HEIGHT) ...]
-       [(>= y HEIGHT) ...]))
+    ```lisp
+    ; WorldState -> WorldState
+    (define (f y)
+      (cond
+        [(<= 0 y CLOSE) ...]
+        [(<= CLOSE y HEIGHT) ...]
+        [(>= y HEIGHT) ...]))
+    ````
 
 * An itemizations is a mix of all other data types.
-
-   ; A LRCD (for launching rocket count down) is one of:
-   ; – "resting"
-   ; – a Number between -3 and -1
-   ; – a NonnegativeNumber 
-   ; interpretation a grounded rocket, in count-down mode,
-   ; a number denotes the number of pixels between the
-   ; top of the canvas and the rocket (its height)
+    ```
+    ; A LRCD (for launching rocket count down) is one of:
+    ; – "resting"
+    ; – a Number between -3 and -1
+    ; – a NonnegativeNumber 
+    ; interpretation a grounded rocket, in count-down mode,
+    ; a number denotes the number of pixels between the
+    ; top of the canvas and the rocket (its height)
+    ````
 
 * Design of a function depends on a data type. For functional examples you should pick at least one example from each sub-class in the data definition. 
 
 * When you need to combine several related pieces of data into one entity, use a structure.
+    
+    A structure data type is defined like this:
+    `(define-struct person [name email age])`
    
-   A structure data type is defined like this:
-   (define-struct person [name email age])
-   
-   Other functions are created automatically.
-   
-   (make-person "Dave" "dave@gmail.com" 32)          ; constructor
-   (person-name p) (person-email p) (person-age p)   ; selectors
-   (person? p)                                       ; predicate
+    Other functions are created automatically.
+    ```lisp
+    (make-person "Dave" "dave@gmail.com" 32)          ; constructor
+    (person-name p) (person-email p) (person-age p)   ; selectors
+    (person? p)                                       ; predicate
+    ```
 
 * Here is a proper structure type definition:
+    ```lisp
+    (define-struct person [name email salary])
+    ; An Person is a structure: 
+    ;   (make-person String String Number)
+    ; interpretation a persons's name, email and salary 
 
-   (define-struct person [name email salary])
-   ; An Person is a structure: 
-   ;   (make-person String String Number)
-   ; interpretation a persons's name, email and salary 
-
-   (define (process-person p)
-     (... (person-name p) ... (person-email p) ... (person-salary p) ...))
+    (define (process-person p)
+      (... (person-name p) ... (person-email p) ... (person-salary p) ...))
+    ````
 
 * One thing to keep in mind is that data definitions may refer to other data definitions.  If a function deals with nested structures, develop one function per level of nesting. 
 
-* It is better if your program has a few pivotal constants and everything else follow from them. For example, you define the size of a ball and the sizes of other objects are computed from it. 
+* It is better if your program has *a few pivotal constants* and everything else follow from them. For example, you define the size of a ball and the sizes of other objects are computed from it. 
 
 * Make examples for data definitions like you do for functions. Examples help to understand.
 
