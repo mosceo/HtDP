@@ -143,7 +143,7 @@ We write data definitions that describe classes of data.
     ```
 
 * Here is a proper structure type definition:
-    ```lisp
+    ```racket
     (define-struct person [name email salary])
     ; An Person is a structure: 
     ;   (make-person String String Number)
