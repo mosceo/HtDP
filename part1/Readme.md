@@ -92,85 +92,90 @@ we don't have to think how its rendering on the screen changes.
 * Imagine you have a finite collection of elements of the same type.
 If you can assign only these elements to your data type, this data type is an enumeration.
 Here is an example:
+ 
+```racket
+; A TrafficLight is one of the following Strings:
+; – "red"
+; – "green"
+; – "yellow"
+; interpretation the three strings represent the three 
+; possible states that a traffic light may assume 
+```
 
-   ; A TrafficLight is one of the following Strings:
-   ; – "red"
-   ; – "green"
-   ; – "yellow"
-   ; interpretation the three strings represent the three 
-   ; possible states that a traffic light may assume 
+In a function template you create as many cond clauses as there are elements in the enumeration.
 
-   In a function template you create as many cond clauses as there are elements in the enumeration.
-   
-   ; WorldState KeyEvent -> ...
-   (define (next-light tl)
-     (cond
-       [(string=? "red" tl) ...]
-       [(string=? "green" tl) ...]
-       [(string=? "blue" tl) ...]
-       [else ...]))
+```racket
+; WorldState KeyEvent -> ...
+(define (next-light tl)
+  (cond
+    [(string=? "red" tl) ...]
+    [(string=? "green" tl) ...]
+    [(string=? "blue" tl) ...]
+    [else ...]))
+```
 
 * An interval is a description of a class of numbers via boundaries.
     
-    ```
-    ; A WorldState falls into one of three intervals: 
-    ; – between 0 and CLOSE
-    ; – between CLOSE and HEIGHT
-    ; – below HEIGHT
-    ```
+```racket
+; A WorldState falls into one of three intervals: 
+; – between 0 and CLOSE
+; – between CLOSE and HEIGHT
+; – below HEIGHT
+```
 
-    In a function template the number of cond clauses is equal to the number of intervals.
+In a function template the number of cond clauses is equal to the number of intervals.
 
-    ```racket
-    ; WorldState -> WorldState
-    (define (f y)
-      (cond
-        [(<= 0 y CLOSE) ...]
-        [(<= CLOSE y HEIGHT) ...]
-        [(>= y HEIGHT) ...]))
-    ```
+```racket
+; WorldState -> WorldState
+(define (f y)
+  (cond
+    [(<= 0 y CLOSE) ...]
+    [(<= CLOSE y HEIGHT) ...]
+    [(>= y HEIGHT) ...]))
+```
 
 * An *itemizations* is a mix of all other data types.
 
-    ```racket
-    ; A LRCD (for launching rocket count down) is one of:
-    ; – "resting"
-    ; – a Number between -3 and -1
-    ; – a NonnegativeNumber 
-    ; interpretation a grounded rocket, in count-down mode,
-    ; a number denotes the number of pixels between the
-    ; top of the canvas and the rocket (its height)
-    ````
+```racket
+; A LRCD (for launching rocket count down) is one of:
+; – "resting"
+; – a Number between -3 and -1
+; – a NonnegativeNumber 
+; interpretation a grounded rocket, in count-down mode,
+; a number denotes the number of pixels between the
+; top of the canvas and the rocket (its height)
+```
 
 * Design of a function depends on a data type. For functional examples you should pick
 at least one example from each sub-class in the data definition. 
 
 * When you need to combine several related pieces of data into one entity, use a structure.
     
-    A structure data type is defined like this:
+A structure data type is defined like this:
 
-    ```racket
-    (define-struct person [name email age])
-    ```
-    Other functions are created automatically.
+```racket
+(define-struct person [name email age])
+```
 
-    ```racket
-    (make-person "Dave" "dave@gmail.com" 32)          ; constructor
-    (person-name p) (person-email p) (person-age p)   ; selectors
-    (person? p)                                       ; predicate
-    ```
+Other functions are created automatically.
+
+```racket
+(make-person "Dave" "dave@gmail.com" 32)          ; constructor
+(person-name p) (person-email p) (person-age p)   ; selectors
+(person? p)                                       ; predicate
+```
 
 * Here is a proper structure type definition:
     
-    ```racket
-    (define-struct person [name email salary])
-    ; An Person is a structure: 
-    ;   (make-person String String Number)
-    ; interpretation a persons's name, email and salary 
+```racket
+(define-struct person [name email salary])
+; An Person is a structure: 
+;   (make-person String String Number)
+; interpretation a persons's name, email and salary 
 
-    (define (process-person p)
-      (... (person-name p) ... (person-email p) ... (person-salary p) ...))
-    ````
+(define (process-person p)
+  (... (person-name p) ... (person-email p) ... (person-salary p) ...))
+```
 
 * One thing to keep in mind is that data definitions may refer to other data definitions.
 If a function deals with nested structures, develop one function per level of nesting. 
