@@ -39,6 +39,7 @@ HtDP 2e, Part 1. Review.
 * There are six steps in the *design recipe for functions*:
   
   1. **From Problem Analysis to Data Definitions**
+
      Identify the information that must be represented and how it is represented
      in the chosen programming language.
      Formulate data definitions and illustrate them with examples.
