@@ -59,12 +59,14 @@ We write data definitions that describe classes of data.
       when the need arises—and it will arise for any serious program.
 
 * Here are the components that a fuction consists of.
-   ; Number -> Number                                < signature
-   ; computes the area of a square with side len     < purpose statement
-   ; given: 2, expect: 4                             < examples
-   ; given: 7, expect: 49
-   (define (area-of-square len)                      < function definition (body)
-     (sqr len))
+    ```
+    ; Number -> Number                                signature
+    ; computes the area of a square with side len     purpose statement
+    ; given: 2, expect: 4                             examples
+    ; given: 7, expect: 49
+    (define (area-of-square len)                      function definition (body)
+      (sqr len))
+    ```
 
 * Top-down approach to design says that we first design top-level functions, than lower-level functions, than more-lower-level primitives and so on. We can implement a top-level function in terms of lower-level functions that don't yet exist. We pretend that they exist and put them on our *wish-list* to implement them later.
 
