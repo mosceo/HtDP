@@ -178,17 +178,17 @@ Other functions are created automatically.
   ```
 
 * One thing to keep in mind is that data definitions may refer to other data definitions.
-If a function deals with nested structures, develop one function per level of nesting. 
+  If a function deals with nested structures, develop one function per level of nesting. 
 
 * It is better if your program has *a few pivotal constants* and everything else follow from them.
-For example, you define the size of a ball and the sizes of other objects are computed from it. 
+  For example, you define the size of a ball and the sizes of other objects are computed from it. 
 
 * Make examples for data definitions like you do for functions. Examples help to understand.
 
 * When we design an application, we make design choices. In future they may turn out to be bad design choices.
-We might realize that If we had chosen other data structures the program would be simpler.
-We can't learn how to make good choices, it only comes with practice.
+  We might realize that If we had chosen other data structures the program would be simpler.
+  We can't learn how to make good choices, it only comes with practice.
 
 * Don't reinvent the wheel. Your language probably comes with a rich library and you have to know it well.
-Functions from the library are well-written and well-tested.
+  Functions from the library are well-written and well-tested.
 
