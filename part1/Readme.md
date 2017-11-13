@@ -167,15 +167,15 @@ Other functions are created automatically.
 
 * Here is a proper structure type definition:
     
-```racket
-(define-struct person [name email salary])
-; An Person is a structure: 
-;   (make-person String String Number)
-; interpretation a persons's name, email and salary 
+  ```racket
+  (define-struct person [name email salary])
+  ; An Person is a structure: 
+  ;   (make-person String String Number)
+  ; interpretation a persons's name, email and salary 
 
-(define (process-person p)
-  (... (person-name p) ... (person-email p) ... (person-salary p) ...))
-```
+  (define (process-person p)
+    (... (person-name p) ... (person-email p) ... (person-salary p) ...))
+  ```
 
 * One thing to keep in mind is that data definitions may refer to other data definitions.
 If a function deals with nested structures, develop one function per level of nesting. 
