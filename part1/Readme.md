@@ -38,27 +38,26 @@ HtDP 2e, Part 1. Review.
 
 * There are six steps in the *design recipe for functions*:
   
-  1. **From Problem Analysis to Data Definitions**
-
+  1. **From Problem Analysis to Data Definitions**<br>
      Identify the information that must be represented and how it is represented
      in the chosen programming language.
      Formulate data definitions and illustrate them with examples.
   
-  2. **Signature, Purpose Statement, Header**
+  2. **Signature, Purpose Statement, Header**<br>
      State which data the desired function consumes and produces.
      Articulate what the function computes as a concise one-line statement.
      Define a stub that lives up to the signature.
   
-  3. **Functional Examples**
+  3. **Functional Examples**<br>
      Work through examples that illustrate the function’s purpose.
   
-  4. **Function Template**
+  4. **Function Template**<br>
      Translate the data definitions into an outline of the function.
   
-  5. **Function Definition**
+  5. **Function Definition**<br>
      Fill in the gaps in the function template. Exploit the purpose statement and the examples.
   
-  6. **Testing**
+  6. **Testing**<br>
      Articulate the examples as tests and ensure that the function passes all.
      Doing so discovers mistakes and also helps others read and understand the definition
      when the need arises—and it will arise for any serious program.
