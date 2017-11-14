@@ -27,8 +27,8 @@
 ; Constants and data definitions
 ;=======================================
 
-(define CAT (bitmap "cat/cat.png"))
-(define FOOD (bitmap "cat/food.png"))
+(define CAT (bitmap "cat.png"))
+(define FOOD (bitmap "food.png"))
 (define CAT-RADIUS (/ (image-width CAT) 2))
 (define WIDTH 600)
 (define HEIGHT 400)

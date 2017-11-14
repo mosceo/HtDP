@@ -23,8 +23,8 @@
 ; > Canvas
 (define WIDTH 400)
 (define HEIGHT 600)
-(define CLOUD (bitmap "invaders/cloud.png"))
-(define TREE (bitmap "invaders/tree.png"))
+(define CLOUD (bitmap "cloud.png"))
+(define TREE (bitmap "tree.png"))
 ; the y-coordinate for trees
 (define TREE-Y (- HEIGHT (/ (image-height TREE) 2)))
 (define LEFT-MOUNTAIN (polygon (list (make-posn 0 (* HEIGHT 0.75))
@@ -60,14 +60,14 @@
 
 
 ; > Missile launcher
-(define LAUNCHER (bitmap "invaders/car.png"))
+(define LAUNCHER (bitmap "car.png"))
 ; it moves by that many pixels when "left" or "right" is pressed
 (define LAUNCHER-DX 5)
 ; the y-coordinate of the launcher (never changes)
 (define LAUNCHER-Y (- HEIGHT (/ (image-height LAUNCHER) 2)))
 
 ; > UFO
-(define UFO (bitmap "invaders/ufo.png"))
+(define UFO (bitmap "ufo.png"))
 (define UFO-WIDTH (image-width UFO))
 (define UFO-RADIUS (/ (image-height UFO) 2))
 ; UFO changes its x-direction randomly; to achive this we introduce
@@ -88,7 +88,7 @@
 (define UFO-Y (- (image-height UFO)))
 
 ; > Missile
-(define MISSILE (bitmap "invaders/missile.png"))
+(define MISSILE (bitmap "missile.png"))
 (define MSL-VEL -500)
 (define MSL-VEL-VEC (make-posn 0 MSL-VEL))
 ; initial y-coordinate for a missile
