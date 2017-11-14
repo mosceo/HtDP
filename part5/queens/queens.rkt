@@ -171,7 +171,7 @@
 ; so its real width on will differ by 2 pixels
 (define BWIDTH 52)
 ; image of a queen
-(define QUEEN (bitmap "queens/queen.png"))
+(define QUEEN (bitmap "queen.png"))
 ; image of a square
 (define SQUARE (overlay (square WIDTH "solid" "white")
                         (square (+ WIDTH 2) "solid" "black")))
