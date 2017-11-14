@@ -1,9 +1,9 @@
-## About
+# About
 
-This repository contains games that I made while reading «*How to Design Programs, 2e*» by *Matthias Felleisen*.
-I also wrote a review for each part of the book that collects the main ideas from the part.
+This repository contains games that I made while reading *[How to Design Programs, 2e](http://www.ccs.neu.edu/home/matthias/HtDP2e/)* by *Matthias Felleisen*.
+I also wrote a review for each part of the book that collects the main ideas of this part.
 
-## List of games
+# Games
 
 ![Screenshots of the games](screenshot.png)
 
@@ -13,3 +13,4 @@ I also wrote a review for each part of the book that collects the main ideas fro
 4. **Snake** — Control a snake that eats fruit and grows.
 5. **Tetris** — A full-fledged version of tetris.
 6. **The N Queens Puzzle** — Place N queens on an NxN chessboard.
+
