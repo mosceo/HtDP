@@ -36,7 +36,7 @@ HtDP 2e, Part 1. Review.
   ; possible states that a traffic light may assume
   ```
 
-* There are six steps in the *design recipe for functions*:
+* There are six steps in the design recipe for functions:
   
   1. **From Problem Analysis to Data Definitions**<br>
      Identify the information that must be represented and how it is represented
