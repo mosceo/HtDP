@@ -1,7 +1,7 @@
 HtDP 2e, Part 2. Review.
 ========================
 
-* The most interesting programs deal with *data of arbitrary size*.
+* The most interesting programs deal with data of arbitrary size.
   Often we can't predict the size of data. If the size of data is known,
   use structs, otherwise use lists.
 
