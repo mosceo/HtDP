@@ -11,7 +11,7 @@ HtDP 2e, Part 3. Review.
 
 * We make abstract functions and define specific functions in terms of the abstract ones.
 
-* Functions can consume functions. Functions are values as well
+* Functions can consume functions. Functions are values as well.
   That's the world of functional languages, baby.
 
 * We also can abstract data definitions. They begin to have parameters.
@@ -79,7 +79,7 @@ HtDP 2e, Part 3. Review.
 
 * Here is design recipe:
    
-  1. To follow the design recipe for functions.
+  1. Follow the design recipe for functions.
   2. Exploit the signature and purpose statement to find a matching abstraction (filter, map, foldr).
   3. Write down a template.
   4. Finally, it is time to define the auxiliary function inside local.
@@ -99,7 +99,7 @@ HtDP 2e, Part 3. Review.
 
 * Here is an interesting data definition:
   
-  ```
+  ```racket
   ; A Shape is a function: 
   ;   [Posn -> Boolean]
   ; interpretation if s is a shape and p a Posn, (s p) 
