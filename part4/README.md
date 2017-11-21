@@ -2,7 +2,7 @@ HtDP 2e, Part 4. Review.
 ========================
 
 * Common generalizations involve many self-references in one data definition or a bunch
-  of data definitions that refer to each other. These forms of data have become ubiquitous
+  of data definitions that refer to each other. These forms of data have become ubiquitous.
 
 * For intertwined data definitions, create one template per data definition.
   Create them in parallel. Make sure they refer to each other in the same way the data definitions do.
