@@ -44,15 +44,15 @@ HtDP 2e, Part 5. Review.
   ```
 
 * Every function designed according to the old recipe either produces an answer or raises an error.
-  Generative recursion adds an entirely new aspect to computations: non-termination.
+  Generative recursion adds an entirely new aspect to computations: *non-termination*.
   Algorithms may not terminate for some inputs. You should present some argument that
   the program will terminate and warn the readers of your code of "bad" input.
 
 * *Parsing* is so complex and so central to the creation of full-fledged software applications,
   that most undergraduate curricula come with at least one course on parsing.
 
-* ISL+ treats numbers like 2.9999 as exact rational numbers and computation
-  with them can take a lot of time. Use #i2.9999 if needed.
+* ISL+ treats numbers like `2.9999` as exact rational numbers and computation
+  with them can take a lot of time. Use `#i2.9999` if needed.
 
 * While we have dubbed it generative recursion,
   most computer scientists refer to these functions as *algorithms*.
@@ -60,7 +60,7 @@ HtDP 2e, Part 5. Review.
 * For truly clever algorithms, software companies employ highly paid specialists, domain experts,
   and mathematicians. Programmers in general implement only simple or well-known algorithms.
 
-* When programs grow large, data abstraction becomes a critical tool for the construction of a program’s components.
+* When programs grow large, *data abstraction* becomes a critical tool for the construction of a program’s components.
 
 * The best preparation is practice.
 
